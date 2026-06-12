@@ -1,0 +1,1052 @@
+{
+  "userId": "demo-user",
+  "dates": {
+    "2026-04-10": {
+      "images": [
+        {
+          "id": "a99c7dbd-88e5-421f-aae5-6e875cf014b6",
+          "path": "uploads/example_2026-04-10_00_1d609513131bf62e.jpg",
+          "timestamp": "2026-04-10T09:00:00Z",
+          "caption": "",
+          "fullText": "",
+          "palette": [
+            "#8d7564",
+            "#cfc0b0",
+            "#4b3b35",
+            "#d8a289",
+            "#171111",
+            "#baafa8",
+            "#4c3e35",
+            "#6494b4"
+          ],
+          "rotation": 0,
+          "dominantColor": "#8d7564"
+        },
+        {
+          "id": "15475f1d-61f3-4b14-8de2-cd905be5a219",
+          "path": "uploads/example_2026-04-10_01_cfe2feabce4b8360.jpg",
+          "timestamp": "2026-04-10T09:17:00Z",
+          "caption": "",
+          "fullText": "",
+          "palette": [
+            "#786a53",
+            "#161210",
+            "#ced0cd",
+            "#8e999e",
+            "#c1ae95",
+            "#aaa191",
+            "#363025",
+            "#6482b4"
+          ],
+          "rotation": 0,
+          "userFrame": "polaroid-blush",
+          "dominantColor": "#786a53"
+        },
+        {
+          "id": "880bb61b-2c0d-4aff-a5f1-0a5f5e5dfbc0",
+          "path": "uploads/example_2026-04-10_02_34ad2ce38be43e4d.jpg",
+          "timestamp": "2026-04-10T09:34:00Z",
+          "caption": "it has always been my dream",
+          "fullText": "I finally visited France! It has always been my dream!!",
+          "palette": [
+            "#5f4a38",
+            "#535d67",
+            "#848381",
+            "#d2c2aa",
+            "#2a2720",
+            "#9a826d",
+            "#19130e",
+            "#648fb4"
+          ],
+          "rotation": 0,
+          "userFrame": "bare",
+          "dominantColor": "#5f4a38"
+        },
+        {
+          "id": "da90784e-44a0-466d-855b-7ed47394d3c7",
+          "path": "uploads/example_2026-04-10_03_7cc639dbeb0572d1.jpg",
+          "timestamp": "2026-04-10T09:51:00Z",
+          "caption": "",
+          "fullText": "",
+          "palette": [
+            "#846f58",
+            "#b2a99d",
+            "#1d1510",
+            "#e2c879",
+            "#574837",
+            "#b2a79a",
+            "#41372b",
+            "#648ab4"
+          ],
+          "rotation": 0,
+          "userFrame": "tv-retro",
+          "dominantColor": "#846f58"
+        }
+      ],
+      "lastUpdated": "2026-05-01T18:11:52.979Z",
+      "pageOverrides": {
+        "0": {
+          "bgSeed": 180,
+          "layoutSeed": 121,
+          "decorSeed": 130
+        }
+      },
+      "themeOverride": "old-money",
+      "labels": [
+        "dreamy",
+        "pretty",
+        "soft"
+      ],
+      "theme": "music-player"
+    },
+    "2026-04-11": {
+      "images": [
+        {
+          "id": "9394035e-a250-409e-ad45-415b9e9c6a6d",
+          "path": "uploads/example_2026-04-11_00_0b8ac98a2f761e5c.jpg",
+          "timestamp": "2026-04-11T09:00:00Z",
+          "caption": "",
+          "fullText": "",
+          "palette": [
+            "#664933",
+            "#38341e",
+            "#40551f",
+            "#769b99",
+            "#566b65",
+            "#a18068",
+            "#1c130d",
+            "#6493b4"
+          ],
+          "rotation": 0,
+          "userFrame": "png-camera-white",
+          "userScale": 2,
+          "dominantColor": "#664933"
+        },
+        {
+          "id": "fd394d25-290a-45be-863f-9c5d13c6daed",
+          "path": "uploads/example_2026-04-11_01_5f960273c8a0bfb9.jpg",
+          "timestamp": "2026-04-11T09:17:00Z",
+          "caption": "",
+          "fullText": "",
+          "palette": [
+            "#343e1f",
+            "#838971",
+            "#a29f59",
+            "#3f5e5a",
+            "#c6cebd",
+            "#6e7f4f",
+            "#000000",
+            "#7f64b4"
+          ],
+          "dominantColor": "#343e1f"
+        },
+        {
+          "id": "1747ad70-2338-4a10-b963-821ec640904c",
+          "path": "uploads/example_2026-04-11_02_5f9b0598b168f62a.jpg",
+          "timestamp": "2026-04-11T09:34:00Z",
+          "caption": "",
+          "fullText": "",
+          "palette": [
+            "#252c19",
+            "#18150b",
+            "#616832",
+            "#324e1d",
+            "#759b4c",
+            "#5f6c49",
+            "#000000",
+            "#8164b4"
+          ],
+          "dominantColor": "#252c19"
+        },
+        {
+          "id": "fbb86f73-a6f6-491e-a1e4-08e7ec561550",
+          "path": "uploads/example_2026-04-11_03_4b96780972990521.jpg",
+          "timestamp": "2026-04-11T09:51:00Z",
+          "caption": "",
+          "fullText": "",
+          "palette": [
+            "#4d4a32",
+            "#ddcdbb",
+            "#101011",
+            "#8d8c86",
+            "#9f9b5a",
+            "#8a8566",
+            "#090906",
+            "#646eb4"
+          ],
+          "dominantColor": "#4d4a32"
+        },
+        {
+          "id": "c1ac3254-1775-4280-abeb-771a9456d68d",
+          "path": "uploads/example_2026-04-11_04_f9515305aa387357.jpg",
+          "timestamp": "2026-04-11T10:08:00Z",
+          "caption": "",
+          "fullText": "",
+          "palette": [
+            "#0b0e07",
+            "#757772",
+            "#af9f91",
+            "#575930",
+            "#444846",
+            "#435233",
+            "#000000",
+            "#8c64b4"
+          ],
+          "rotation": 0,
+          "dominantColor": "#0b0e07"
+        },
+        {
+          "id": "ed6a75f6-87f1-4ef5-8274-5ac8f7834898",
+          "path": "uploads/example_2026-04-11_05_2d405f97dbcec474.jpg",
+          "timestamp": "2026-04-11T10:25:00Z",
+          "caption": "",
+          "fullText": "",
+          "palette": [
+            "#202018",
+            "#5d652e",
+            "#e6934a",
+            "#774b2c",
+            "#747563",
+            "#5d5c4b",
+            "#000000",
+            "#6469b4"
+          ],
+          "dominantColor": "#202018"
+        }
+      ],
+      "lastUpdated": "2026-05-02T02:07:42.669Z",
+      "pageOverrides": {
+        "0": {
+          "bgSeed": 180,
+          "layoutSeed": 51,
+          "decorSeed": 106
+        }
+      },
+      "themeOverride": [
+        "nature",
+        "cottagecore"
+      ]
+    },
+    "2026-04-12": {
+      "images": [
+        {
+          "id": "16f51297-933e-4141-8347-274a7318e03b",
+          "path": "uploads/example_2026-04-12_00_271dd9b85698b0e1.jpg",
+          "timestamp": "2026-04-12T09:00:00Z",
+          "caption": "",
+          "fullText": "",
+          "palette": [
+            "#bab9b7",
+            "#93705a",
+            "#5b504e",
+            "#e3b99e",
+            "#261e1d",
+            "#f1f1f0",
+            "#83817e",
+            "#647eb4"
+          ],
+          "rotation": 0,
+          "dominantColor": "#bab9b7"
+        },
+        {
+          "id": "800d9b4b-efa7-43b0-8bbc-f13136cd6aa1",
+          "path": "uploads/example_2026-04-12_01_ed4e4d77448e199e.jpg",
+          "timestamp": "2026-04-12T09:17:00Z",
+          "caption": "",
+          "fullText": "",
+          "palette": [
+            "#0d0d0f",
+            "#777470",
+            "#3e3e3f",
+            "#b2a190",
+            "#c3c4c9",
+            "#424349",
+            "#000000",
+            "#b4aa64"
+          ],
+          "rotation": 0,
+          "dominantColor": "#0d0d0f"
+        },
+        {
+          "id": "0533c734-8d86-4e2b-8b87-4fa6e56bbf63",
+          "path": "uploads/example_2026-04-12_02_1db0483b34c25d7d.jpg",
+          "timestamp": "2026-04-12T09:34:00Z",
+          "caption": "",
+          "fullText": "",
+          "palette": [
+            "#060706",
+            "#36332d",
+            "#78776f",
+            "#58544c",
+            "#211e19",
+            "#3b423e",
+            "#000000",
+            "#b46492"
+          ],
+          "rotation": 0,
+          "userFrame": "bare",
+          "dominantColor": "#060706"
+        },
+        {
+          "id": "974d6d98-725c-4921-83df-f4b61c35ed80",
+          "path": "uploads/example_2026-04-12_03_9caa4e6a3ab507b3.jpg",
+          "timestamp": "2026-04-12T09:51:00Z",
+          "caption": "",
+          "fullText": "",
+          "palette": [
+            "#d6d7d0",
+            "#a9aaa5",
+            "#5a5f58",
+            "#0f1111",
+            "#949687",
+            "#ffffff",
+            "#a1a394",
+            "#6f64b4"
+          ],
+          "rotation": 0,
+          "userFrame": "png-camera-canon-silver-a",
+          "dominantColor": "#d6d7d0",
+          "userScale": 1
+        }
+      ],
+      "lastUpdated": "2026-05-02T02:09:03.785Z",
+      "pageOverrides": {
+        "0": {
+          "bgSeed": 152,
+          "layoutSeed": 47,
+          "decorSeed": 167
+        }
+      },
+      "themeOverride": "noir"
+    },
+    "2026-04-13": {
+      "images": [
+        {
+          "id": "666c48cf-30f7-44ad-9b13-a667baca1ecd",
+          "path": "uploads/example_2026-04-13_00_833b0040bc807d8a.jpg",
+          "timestamp": "2026-04-13T09:00:00Z",
+          "caption": "",
+          "fullText": "",
+          "palette": [
+            "#5a3014",
+            "#251811",
+            "#302f3b",
+            "#ce9876",
+            "#cb7611",
+            "#a1663d",
+            "#000000",
+            "#439ad6"
+          ],
+          "rotation": 0,
+          "userFrame": "png-camera-white",
+          "userScale": 2,
+          "dominantColor": "#5a3014"
+        },
+        {
+          "id": "eae07b9c-db14-4d6f-a653-ad7b0fcb12ef",
+          "path": "uploads/example_2026-04-13_01_fab1e90f256ff343.jpg",
+          "timestamp": "2026-04-13T09:17:00Z",
+          "caption": "",
+          "fullText": "",
+          "palette": [
+            "#1e1d25",
+            "#412b20",
+            "#ad9e9b",
+            "#5e5e6a",
+            "#dcc39e",
+            "#545260",
+            "#000000",
+            "#a9b464"
+          ],
+          "rotation": 0,
+          "userFrame": "polaroid-ivory",
+          "dominantColor": "#1e1d25"
+        },
+        {
+          "id": "a22775d1-08d3-4a0d-a3fb-9e064162a7a7",
+          "path": "uploads/example_2026-04-13_02_08de39ecbdb87401.jpg",
+          "timestamp": "2026-04-13T09:34:00Z",
+          "caption": "",
+          "fullText": "",
+          "palette": [
+            "#190b06",
+            "#a19580",
+            "#564434",
+            "#7990b0",
+            "#3b2113",
+            "#673928",
+            "#000000",
+            "#43add5"
+          ],
+          "rotation": 0,
+          "userShape": "rect",
+          "userFrame": "ticket",
+          "userScale": 1,
+          "dominantColor": "#190b06"
+        },
+        {
+          "id": "a9b40026-4b7b-4eb2-9149-fa608b8320ad",
+          "path": "uploads/example_2026-04-13_03_12ad3cff9e3c3fc6.jpg",
+          "timestamp": "2026-04-13T09:51:00Z",
+          "caption": "",
+          "fullText": "",
+          "palette": [
+            "#282115",
+            "#3e2914",
+            "#68685e",
+            "#a6aea8",
+            "#090805",
+            "#6a5b44",
+            "#000000",
+            "#6483b4"
+          ],
+          "rotation": 0,
+          "userFrame": "bare",
+          "userScale": 1,
+          "dominantColor": "#282115"
+        },
+        {
+          "id": "39f097b3-8b6b-4c00-b108-0fde49f1e899",
+          "path": "uploads/example_2026-04-13_04_8e4ac674d4ea4efb.jpg",
+          "timestamp": "2026-04-13T10:08:00Z",
+          "caption": "",
+          "fullText": "",
+          "palette": [
+            "#52310d",
+            "#7f5321",
+            "#c98c42",
+            "#cebd9c",
+            "#2c3545",
+            "#9c6a33",
+            "#000000",
+            "#3989df"
+          ],
+          "rotation": 0,
+          "dominantColor": "#52310d"
+        },
+        {
+          "id": "791967eb-666d-418e-8ed7-6613ee9c0982",
+          "path": "uploads/example_2026-04-13_05_4a4c8f995bc23b42.jpg",
+          "timestamp": "2026-04-13T10:25:00Z",
+          "caption": "",
+          "fullText": "",
+          "palette": [
+            "#0b0806",
+            "#63442b",
+            "#ba8d69",
+            "#951c29",
+            "#1e140e",
+            "#4f3c32",
+            "#000000",
+            "#6497b4"
+          ],
+          "userFrame": "torn",
+          "userScale": 1,
+          "dominantColor": "#0b0806"
+        }
+      ],
+      "lastUpdated": "2026-05-02T02:11:39.397Z",
+      "pageOverrides": {
+        "0": {
+          "bgSeed": 330,
+          "layoutSeed": 69,
+          "decorSeed": 68
+        }
+      },
+      "themeOverride": [
+        "vintage",
+        "luxury",
+        "old-money"
+      ]
+    },
+    "2026-04-14": {
+      "images": [
+        {
+          "id": "2d21276a-4a18-4140-a644-df77f31a2cff",
+          "path": "uploads/example_2026-04-14_00_ce1016f9fe8cbb29.jpg",
+          "timestamp": "2026-04-14T09:00:00Z",
+          "caption": "",
+          "fullText": "",
+          "palette": [
+            "#98b7e4",
+            "#78625d",
+            "#c6c7c6",
+            "#d6ebfa",
+            "#7c808c",
+            "#f2f5fa",
+            "#3b79d1",
+            "#d09849"
+          ],
+          "rotation": 0,
+          "dominantColor": "#98b7e4",
+          "userFrame": "stamp"
+        },
+        {
+          "id": "cc5e2f3f-2611-4928-b783-b50db0265bb9",
+          "path": "uploads/example_2026-04-14_01_085641e2bc7ac854.jpg",
+          "timestamp": "2026-04-14T09:17:00Z",
+          "caption": "",
+          "fullText": "",
+          "palette": [
+            "#ad7359",
+            "#d1a371",
+            "#948a76",
+            "#e4ecef",
+            "#e9c9b4",
+            "#ccb5ab",
+            "#664130",
+            "#649cb4"
+          ],
+          "userFrame": "png-camera-black-rainbow",
+          "userScale": 1,
+          "dominantColor": "#ad7359"
+        },
+        {
+          "id": "825ad31d-614f-405d-8ff4-a3beb57384e0",
+          "path": "uploads/example_2026-04-14_02_9ed56e318919d81b.jpg",
+          "timestamp": "2026-04-14T09:34:00Z",
+          "caption": "",
+          "fullText": "",
+          "palette": [
+            "#a19b91",
+            "#c4c4c2",
+            "#766855",
+            "#3c743e",
+            "#684121",
+            "#d4d2ce",
+            "#696359",
+            "#6481b4"
+          ],
+          "userFrame": "png-camera-sony-silver",
+          "dominantColor": "#a19b91"
+        },
+        {
+          "id": "083a587c-3640-4f35-8bc7-8557eb2f970c",
+          "path": "uploads/example_2026-04-14_03_1d0af6719aaece33.jpg",
+          "timestamp": "2026-04-14T09:51:00Z",
+          "caption": "",
+          "fullText": "",
+          "palette": [
+            "#5a5d55",
+            "#888572",
+            "#c09b74",
+            "#3d3c2d",
+            "#7b553c",
+            "#92958e",
+            "#21231f",
+            "#8664b4"
+          ],
+          "rotation": 0,
+          "userFrame": "film",
+          "dominantColor": "#5a5d55"
+        }
+      ],
+      "lastUpdated": "2026-05-02T02:11:24.502Z",
+      "pageOverrides": {
+        "0": {
+          "bgSeed": 285,
+          "layoutSeed": 30,
+          "decorSeed": 86
+        }
+      },
+      "themeOverride": [
+        "fun",
+        "daily",
+        "clean",
+        "sporty",
+        "photobooth",
+        "summer"
+      ]
+    },
+    "2026-04-15": {
+      "images": [
+        {
+          "id": "e1edaa6b-1843-49c2-b37d-87b72241da83",
+          "path": "uploads/example_2026-04-15_00_86e6643205f60ffb.jpg",
+          "timestamp": "2026-04-15T09:00:00Z",
+          "caption": "",
+          "fullText": "",
+          "palette": [
+            "#897d5e",
+            "#c1b5a4",
+            "#342f30",
+            "#e7dbc9",
+            "#725d61",
+            "#b7b0a1",
+            "#474030",
+            "#647bb4"
+          ],
+          "rotation": 0,
+          "dominantColor": "#897d5e",
+          "userFrame": "film"
+        },
+        {
+          "id": "4789ee2e-09b0-411e-92c5-29a9838b7182",
+          "path": "uploads/example_2026-04-15_01_d7e4610b74999152.jpg",
+          "timestamp": "2026-04-15T09:17:00Z",
+          "caption": "",
+          "fullText": "",
+          "palette": [
+            "#b5a691",
+            "#c597a0",
+            "#8d656b",
+            "#d9d7d9",
+            "#3c2b2a",
+            "#e0dcd6",
+            "#806e55",
+            "#6485b4"
+          ],
+          "userFrame": "torn",
+          "dominantColor": "#b5a691",
+          "userScale": 1
+        },
+        {
+          "id": "6c44c910-4e50-4dc5-934c-4db3047dae09",
+          "path": "uploads/example_2026-04-15_02_b289bf2605619e03.jpg",
+          "timestamp": "2026-04-15T09:34:00Z",
+          "caption": "",
+          "fullText": "",
+          "palette": [
+            "#373834",
+            "#5c5850",
+            "#998d80",
+            "#d5c9ba",
+            "#292926",
+            "#70716b",
+            "#000000",
+            "#7664b4"
+          ],
+          "rotation": 0,
+          "dominantColor": "#373834"
+        },
+        {
+          "id": "e7bc473e-e6f7-44a6-8948-07d2a76cdcf7",
+          "path": "uploads/example_2026-04-15_03_8e9f4d18f4d34754.jpg",
+          "timestamp": "2026-04-15T09:51:00Z",
+          "caption": "",
+          "fullText": "",
+          "palette": [
+            "#746d5e",
+            "#45392a",
+            "#c3c0b3",
+            "#8ea0aa",
+            "#61523f",
+            "#a8a49a",
+            "#36332c",
+            "#647db4"
+          ],
+          "dominantColor": "#746d5e"
+        },
+        {
+          "id": "095aaa56-1b32-4d08-86d1-12c2f68ef759",
+          "path": "uploads/example_2026-04-15_04_e9ee485bb645f872.jpg",
+          "timestamp": "2026-04-15T10:08:00Z",
+          "caption": "",
+          "fullText": "",
+          "palette": [
+            "#dcdbd6",
+            "#b8b0a4",
+            "#561a16",
+            "#6a4b34",
+            "#ccb594",
+            "#ffffff",
+            "#a8a699",
+            "#646fb4"
+          ],
+          "rotation": 0,
+          "dominantColor": "#dcdbd6"
+        }
+      ],
+      "lastUpdated": "2026-05-10T11:28:07.995Z",
+      "pageOverrides": {
+        "0": {
+          "bgSeed": 719,
+          "layoutSeed": 83,
+          "decorSeed": 142
+        }
+      },
+      "themeOverride": [
+        "sporty",
+        "clean",
+        "coquette"
+      ]
+    },
+    "2026-04-16": {
+      "images": [
+        {
+          "id": "f21d6969-8cf3-4b29-9091-4b6f5b5aa0e9",
+          "path": "uploads/example_2026-04-16_00_4c92c0276d15a488.jpg",
+          "timestamp": "2026-04-16T09:00:00Z",
+          "caption": "",
+          "fullText": "",
+          "palette": [
+            "#c5c0b6",
+            "#938e84",
+            "#5d4930",
+            "#677176",
+            "#17120e",
+            "#f6f6f5",
+            "#938a78",
+            "#647fb4"
+          ],
+          "rotation": 0,
+          "dominantColor": "#c5c0b6"
+        },
+        {
+          "id": "6f7d2bcd-67ef-40c0-9b1b-5d2d91eb3783",
+          "path": "uploads/example_2026-04-16_01_be68193f0df63be2.jpg",
+          "timestamp": "2026-04-16T09:17:00Z",
+          "caption": "",
+          "fullText": "",
+          "palette": [
+            "#c6a68b",
+            "#8f6c53",
+            "#a3948d",
+            "#ddceca",
+            "#57321e",
+            "#e8e0da",
+            "#996d49",
+            "#6490b4"
+          ],
+          "rotation": 0,
+          "userFrame": "png-oval-mirror",
+          "userScale": 3,
+          "dominantColor": "#c6a68b"
+        },
+        {
+          "id": "eb637ab5-f347-4726-959b-ec0c4d6c2a90",
+          "path": "uploads/example_2026-04-16_02_5b58118ad41e9785.jpg",
+          "timestamp": "2026-04-16T09:34:00Z",
+          "caption": "",
+          "fullText": "",
+          "palette": [
+            "#816f5c",
+            "#362a1c",
+            "#7c5e3a",
+            "#dcd8ce",
+            "#e0af70",
+            "#b1a79d",
+            "#40372d",
+            "#648cb4"
+          ],
+          "rotation": 0,
+          "userFrame": "torn",
+          "dominantColor": "#816f5c"
+        },
+        {
+          "id": "decafe28-16ca-450c-bd7e-446503a2ee8c",
+          "path": "uploads/example_2026-04-16_03_8967bb5fa76e11c7.jpg",
+          "timestamp": "2026-04-16T09:51:00Z",
+          "caption": "",
+          "fullText": "",
+          "palette": [
+            "#b3a694",
+            "#88755f",
+            "#d9d8d1",
+            "#5c4634",
+            "#96999b",
+            "#e0dcd7",
+            "#7f6e58",
+            "#6486b4"
+          ],
+          "rotation": 0,
+          "userFrame": "png-vintage-oled",
+          "userScale": 2,
+          "dominantColor": "#b3a694"
+        },
+        {
+          "id": "8e5ed6c9-5d1b-4fbd-96aa-e7cd612727a8",
+          "path": "uploads/example_2026-04-16_04_363469da80b18d3f.jpg",
+          "timestamp": "2026-04-16T10:08:00Z",
+          "caption": "",
+          "fullText": "",
+          "palette": [
+            "#dbdbd6",
+            "#b5ad9e",
+            "#6b675d",
+            "#171614",
+            "#d0c7b8",
+            "#ffffff",
+            "#a6a799",
+            "#6c64b4"
+          ],
+          "rotation": 0,
+          "userFrame": "polaroid",
+          "dominantColor": "#dbdbd6"
+        }
+      ],
+      "lastUpdated": "2026-05-01T19:39:32.647Z",
+      "pageOverrides": {
+        "0": {
+          "bgSeed": 507,
+          "layoutSeed": 88,
+          "decorSeed": 59
+        }
+      },
+      "themeOverride": "clean"
+    },
+    "2026-04-17": {
+      "images": [
+        {
+          "id": "8e1a2cf8-8a32-417a-8611-e3d8f1313bdf",
+          "path": "uploads/example_2026-04-17_00_apr17.jpg",
+          "timestamp": "2026-04-17T10:00:00Z",
+          "caption": "",
+          "fullText": "",
+          "rotation": 0,
+          "palette": [
+            "#ad836c",
+            "#f4f2ea",
+            "#828869",
+            "#bfc997",
+            "#302d29",
+            "#d1c2b9",
+            "#6e4d3b",
+            "#6498b4"
+          ],
+          "userShape": "rect",
+          "userFrame": "bare",
+          "userObjPos": "50.0% 48.4%",
+          "dominantColor": "#ad836c"
+        }
+      ],
+      "labels": [],
+      "lastUpdated": "2026-05-10T11:28:57.428Z",
+      "theme": "daily",
+      "pageOverrides": {
+        "0": {
+          "bgSeed": 114,
+          "layoutSeed": 38,
+          "decorSeed": 170
+        }
+      },
+      "themeOverride": [
+        "cottagecore",
+        "nature",
+        "daily"
+      ],
+      "special": true
+    },
+    "2026-04-dump": {
+      "images": [
+        {
+          "id": "5abbf69a-97b1-4a23-86ab-407e6bb0f66b",
+          "path": "uploads/example_2026-04-10_02_34ad2ce38be43e4d.jpg",
+          "timestamp": "2026-04-10T09:34:00Z",
+          "caption": "it has always been my dream",
+          "fullText": "I finally visited France! It has always been my dream!!",
+          "dominantColor": "#5f4a38",
+          "palette": [
+            "#5f4a38",
+            "#535d67",
+            "#848381",
+            "#d2c2aa",
+            "#2a2720",
+            "#9a826d",
+            "#19130e",
+            "#648fb4"
+          ],
+          "compiledFromMonth": "2026-04",
+          "compiledFromImageId": "880bb61b-2c0d-4aff-a5f1-0a5f5e5dfbc0",
+          "userFrame": "png-tv-retro-c",
+          "userScale": 2
+        },
+        {
+          "id": "a83fafd1-19dd-4fab-b59f-2cccc6c10ed6",
+          "path": "uploads/example_2026-04-11_02_5f9b0598b168f62a.jpg",
+          "timestamp": "2026-04-11T09:34:00Z",
+          "caption": "last bite",
+          "fullText": "Today was one of those days where everything just felt right, quiet and warm.",
+          "dominantColor": "#252c19",
+          "palette": [
+            "#252c19",
+            "#18150b",
+            "#616832",
+            "#324e1d",
+            "#759b4c",
+            "#5f6c49",
+            "#000000",
+            "#8164b4"
+          ],
+          "compiledFromMonth": "2026-04",
+          "compiledFromImageId": "1747ad70-2338-4a10-b963-821ec640904c",
+          "userShape": "heart",
+          "userFrame": "bare",
+          "userScale": 1
+        },
+        {
+          "id": "d9609feb-93a2-490b-a5b7-eb6d488ac0ee",
+          "path": "uploads/example_2026-04-12_00_271dd9b85698b0e1.jpg",
+          "timestamp": "2026-04-12T09:00:00Z",
+          "caption": "cozy corner",
+          "fullText": "Nothing happened and yet everything did.",
+          "dominantColor": "#bab9b7",
+          "palette": [
+            "#bab9b7",
+            "#93705a",
+            "#5b504e",
+            "#e3b99e",
+            "#261e1d",
+            "#f1f1f0",
+            "#83817e",
+            "#647eb4"
+          ],
+          "compiledFromMonth": "2026-04",
+          "compiledFromImageId": "16f51297-933e-4141-8347-274a7318e03b",
+          "userFrame": "film",
+          "userScale": -2
+        },
+        {
+          "id": "45097b4c-d5dc-4207-a221-9901d379953c",
+          "path": "uploads/example_2026-04-12_02_1db0483b34c25d7d.jpg",
+          "timestamp": "2026-04-12T09:34:00Z",
+          "caption": "soft sky",
+          "fullText": "Nothing happened and yet everything did.",
+          "dominantColor": "#060706",
+          "palette": [
+            "#060706",
+            "#36332d",
+            "#78776f",
+            "#58544c",
+            "#211e19",
+            "#3b423e",
+            "#000000",
+            "#b46492"
+          ],
+          "compiledFromMonth": "2026-04",
+          "compiledFromImageId": "0533c734-8d86-4e2b-8b87-4fa6e56bbf63",
+          "userScale": -3,
+          "userFrame": "bare",
+          "userShape": "circle"
+        },
+        {
+          "id": "2e3effa9-59f6-448b-9aaa-dc46e7c500f9",
+          "path": "uploads/example_2026-04-13_01_fab1e90f256ff343.jpg",
+          "timestamp": "2026-04-13T09:17:00Z",
+          "caption": "a walk",
+          "fullText": "Nothing happened and yet everything did.",
+          "dominantColor": "#1e1d25",
+          "palette": [
+            "#1e1d25",
+            "#412b20",
+            "#ad9e9b",
+            "#5e5e6a",
+            "#dcc39e",
+            "#545260",
+            "#000000",
+            "#a9b464"
+          ],
+          "compiledFromMonth": "2026-04",
+          "compiledFromImageId": "eae07b9c-db14-4d6f-a653-ad7b0fcb12ef",
+          "userScale": 3,
+          "userFrame": "png-camera-pink-compact"
+        },
+        {
+          "id": "a4018498-c944-455c-b458-203195650dba",
+          "path": "uploads/example_2026-04-14_02_9ed56e318919d81b.jpg",
+          "timestamp": "2026-04-14T09:34:00Z",
+          "caption": "morning light",
+          "fullText": "We stayed out until the sky turned that color.",
+          "dominantColor": "#a19b91",
+          "palette": [
+            "#a19b91",
+            "#c4c4c2",
+            "#766855",
+            "#3c743e",
+            "#684121",
+            "#d4d2ce",
+            "#696359",
+            "#6481b4"
+          ],
+          "compiledFromMonth": "2026-04",
+          "compiledFromImageId": "825ad31d-614f-405d-8ff4-a3beb57384e0",
+          "userShape": "circle",
+          "userScale": 3
+        },
+        {
+          "id": "7961bc85-dc96-4a95-90ac-8f701b98cfab",
+          "path": "uploads/example_2026-04-15_01_d7e4610b74999152.jpg",
+          "timestamp": "2026-04-15T09:17:00Z",
+          "caption": "a walk",
+          "fullText": "We stayed out until the sky turned that color.",
+          "dominantColor": "#b5a691",
+          "palette": [
+            "#b5a691",
+            "#c597a0",
+            "#8d656b",
+            "#d9d7d9",
+            "#3c2b2a",
+            "#e0dcd6",
+            "#806e55",
+            "#6485b4"
+          ],
+          "compiledFromMonth": "2026-04",
+          "compiledFromImageId": "4789ee2e-09b0-411e-92c5-29a9838b7182",
+          "userScale": 2,
+          "userFrame": "film",
+          "userShape": "rect"
+        },
+        {
+          "id": "40fd5ad5-8a9a-4460-9e5c-6f6ff9077bbb",
+          "path": "uploads/example_2026-04-16_01_be68193f0df63be2.jpg",
+          "timestamp": "2026-04-16T09:17:00Z",
+          "caption": "golden hour",
+          "fullText": "Sometimes the smallest things take up the most room in your heart.",
+          "dominantColor": "#c6a68b",
+          "palette": [
+            "#c6a68b",
+            "#8f6c53",
+            "#a3948d",
+            "#ddceca",
+            "#57321e",
+            "#e8e0da",
+            "#996d49",
+            "#6490b4"
+          ],
+          "compiledFromMonth": "2026-04",
+          "compiledFromImageId": "6f7d2bcd-67ef-40c0-9b1b-5d2d91eb3783",
+          "userFrame": "stamp",
+          "userShape": "rect",
+          "userScale": 3
+        },
+        {
+          "id": "8407f478-8121-4750-9e5f-3996f13f20b5",
+          "path": "uploads/example_2026-04-17_00_apr17.jpg",
+          "timestamp": "2026-04-17T10:00:00Z",
+          "caption": "morning light",
+          "fullText": "We stayed out until the sky turned that color.",
+          "dominantColor": "#ad836c",
+          "palette": [
+            "#ad836c",
+            "#f4f2ea",
+            "#828869",
+            "#bfc997",
+            "#302d29",
+            "#d1c2b9",
+            "#6e4d3b",
+            "#6498b4"
+          ],
+          "compiledFromMonth": "2026-04",
+          "compiledFromImageId": "8e1a2cf8-8a32-417a-8611-e3d8f1313bdf",
+          "userShape": "rect",
+          "userFrame": "torn"
+        }
+      ],
+      "lastUpdated": "2026-05-01T18:15:04.068Z",
+      "pageOverrides": {
+        "0": {
+          "bgSeed": 722,
+          "layoutSeed": 52,
+          "decorSeed": 90
+        }
+      },
+      "themeOverride": [
+        "noir",
+        "y2k"
+      ]
+    }
+  },
+  "settings": {
+    "uiAccent": "#313d45"
+  }
+}

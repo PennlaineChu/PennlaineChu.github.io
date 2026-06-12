@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="540" height="960" viewBox="0 0 540 960" preserveAspectRatio="xMidYMid slice">
+  <!--
+    Y2K silver-sparkle pattern — matches reference template 6
+    (charcoal?black gradient with scattered tiny white stars and
+    a few 3D chrome star puffs).
+    9:16 page-native.
+  -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"  stop-color="#2a242a"/>
+      <stop offset="55%" stop-color="#141014"/>
+      <stop offset="100%" stop-color="#050305"/>
+    </linearGradient>
+    <radialGradient id="chrome" cx="35%" cy="30%" r="75%">
+      <stop offset="0%"  stop-color="#ffffff"/>
+      <stop offset="40%" stop-color="#c8cdd3"/>
+      <stop offset="100%" stop-color="#4a4f56"/>
+    </radialGradient>
+    <symbol id="s5" viewBox="0 0 40 40">
+      <path d="M20 2 L 25 15 L 38 16 L 28 24 L 32 38 L 20 30 L 8 38 L 12 24 L 2 16 L 15 15 Z"/>
+    </symbol>
+  </defs>
+
+  <rect x="0" y="0" width="540" height="960" fill="url(#bg)"/>
+
+  <!-- Starfield: ~60 small white dots spread across the page. -->
+  <g fill="#ffffff" opacity="0.85">
+    <circle cx="30"  cy="60"  r="0.9"/>
+    <circle cx="80"  cy="20"  r="1.1"/>
+    <circle cx="120" cy="85"  r="0.8"/>
+    <circle cx="180" cy="40"  r="1.2"/>
+    <circle cx="220" cy="120" r="0.7"/>
+    <circle cx="260" cy="30"  r="1.0"/>
+    <circle cx="310" cy="75"  r="1.1"/>
+    <circle cx="370" cy="110" r="0.9"/>
+    <circle cx="420" cy="55"  r="0.8"/>
+    <circle cx="490" cy="95"  r="1.0"/>
+    <circle cx="55"  cy="155" r="1.0"/>
+    <circle cx="95"  cy="210" r="0.7"/>
+    <circle cx="160" cy="175" r="1.1"/>
+    <circle cx="240" cy="240" r="0.9"/>
+    <circle cx="300" cy="180" r="0.8"/>
+    <circle cx="350" cy="250" r="1.0"/>
+    <circle cx="410" cy="220" r="0.9"/>
+    <circle cx="470" cy="280" r="1.1"/>
+    <circle cx="20"  cy="290" r="1.1"/>
+    <circle cx="70"  cy="340" r="0.8"/>
+    <circle cx="140" cy="320" r="0.9"/>
+    <circle cx="200" cy="360" r="1.0"/>
+    <circle cx="270" cy="310" r="0.7"/>
+    <circle cx="330" cy="370" r="1.2"/>
+    <circle cx="390" cy="330" r="0.9"/>
+    <circle cx="450" cy="400" r="1.0"/>
+    <circle cx="510" cy="360" r="0.8"/>
+    <circle cx="40"  cy="420" r="1.1"/>
+    <circle cx="110" cy="440" r="0.8"/>
+    <circle cx="190" cy="420" r="0.7"/>
+    <circle cx="250" cy="450" r="1.0"/>
+    <circle cx="310" cy="490" r="0.9"/>
+    <circle cx="380" cy="460" r="1.1"/>
+    <circle cx="440" cy="510" r="0.8"/>
+    <circle cx="490" cy="480" r="0.9"/>
+    <circle cx="30"  cy="540" r="1.0"/>
+    <circle cx="80"  cy="580" r="0.7"/>
+    <circle cx="140" cy="560" r="1.1"/>
+    <circle cx="210" cy="600" r="0.9"/>
+    <circle cx="270" cy="550" r="0.8"/>
+    <circle cx="340" cy="610" r="1.0"/>
+    <circle cx="400" cy="580" r="0.9"/>
+    <circle cx="470" cy="630" r="1.1"/>
+    <circle cx="50"  cy="660" r="0.8"/>
+    <circle cx="110" cy="700" r="1.0"/>
+    <circle cx="170" cy="680" r="0.7"/>
+    <circle cx="230" cy="720" r="1.1"/>
+    <circle cx="290" cy="690" r="0.9"/>
+    <circle cx="360" cy="730" r="0.8"/>
+    <circle cx="420" cy="700" r="1.0"/>
+    <circle cx="490" cy="750" r="0.9"/>
+    <circle cx="30"  cy="790" r="1.1"/>
+    <circle cx="90"  cy="820" r="0.8"/>
+    <circle cx="160" cy="810" r="0.9"/>
+    <circle cx="220" cy="850" r="1.0"/>
+    <circle cx="280" cy="820" r="0.7"/>
+    <circle cx="350" cy="860" r="1.1"/>
+    <circle cx="410" cy="840" r="0.9"/>
+    <circle cx="470" cy="880" r="0.8"/>
+    <circle cx="60"  cy="900" r="1.0"/>
+    <circle cx="140" cy="930" r="0.9"/>
+    <circle cx="230" cy="910" r="0.8"/>
+    <circle cx="310" cy="940" r="1.0"/>
+    <circle cx="390" cy="920" r="0.9"/>
+    <circle cx="470" cy="940" r="1.0"/>
+  </g>
+
+  <!-- 4-point sparkle crosses -->
+  <g fill="#ffffff" opacity="0.85">
+    <path d="M120 160 L122 150 L124 160 L134 162 L124 164 L122 174 L120 164 L110 162 Z"/>
+    <path d="M290 90  L292 80  L294 90  L304 92  L294 94  L292 104 L290 94  L280 92  Z"/>
+    <path d="M440 280 L442 270 L444 280 L454 282 L444 284 L442 294 L440 284 L430 282 Z"/>
+    <path d="M70  500 L72  490 L74  500 L84  502 L74  504 L72  514 L70  504 L60  502 Z"/>
+    <path d="M350 620 L352 610 L354 620 L364 622 L354 624 L352 634 L350 624 L340 622 Z"/>
+    <path d="M180 780 L182 770 L184 780 L194 782 L184 784 L182 794 L180 784 L170 782 Z"/>
+  </g>
+
+  <!-- Chrome 3D stars for depth (rare hero accents). -->
+  <g transform="translate(420 120)">
+    <use href="#s5" width="64" height="64" fill="url(#chrome)"/>
+  </g>
+  <g transform="translate(40 460)">
+    <use href="#s5" width="52" height="52" fill="url(#chrome)"/>
+  </g>
+  <g transform="translate(380 760)">
+    <use href="#s5" width="56" height="56" fill="url(#chrome)"/>
+  </g>
+</svg>

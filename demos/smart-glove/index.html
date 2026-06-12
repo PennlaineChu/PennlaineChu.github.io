@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Smart Magnifying Glove — Prototype 1 lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <header class="site-header site-header--shell">
+    <div class="header-inner">
+      <a href="concept.html#overview" class="logo" title="Concept overview">
+        <span class="logo-icon" aria-hidden="true">⌖</span>
+        <span class="logo-text">Magnify Lab</span>
+      </a>
+      <span class="header-page-label">Prototype 1 lab</span>
+      <div class="header-actions">
+        <button type="button" class="btn btn-ghost" id="btn-export" title="Download backup JSON">Export</button>
+        <label class="btn btn-ghost btn-file">
+          Import
+          <input type="file" id="import-file" accept="application/json" hidden />
+        </label>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="app-shell">
+      <aside class="app-sidebar" aria-label="Lab sections">
+        <nav class="app-sidebar-nav">
+          <a href="concept.html" class="app-sidebar-external">Concept</a>
+          <button type="button" class="app-sidebar-link is-active" data-panel-target="overview" aria-pressed="true">Overview</button>
+          <button type="button" class="app-sidebar-link" data-panel-target="vision" aria-pressed="false">Sketch &amp; wires</button>
+          <button type="button" class="app-sidebar-link" data-panel-target="timeline" aria-pressed="false">Timeline</button>
+          <button type="button" class="app-sidebar-link" data-panel-target="shopping" aria-pressed="false">BOM</button>
+          <button type="button" class="app-sidebar-link" data-panel-target="challenges" aria-pressed="false">Problems</button>
+          <button type="button" class="app-sidebar-link" data-panel-target="gallery" aria-pressed="false">Pictures</button>
+          <button type="button" class="app-sidebar-link" data-panel-target="notes" aria-pressed="false">Notes</button>
+          <button type="button" class="app-sidebar-link" data-panel-target="links" aria-pressed="false">Links</button>
+        </nav>
+      </aside>
+      <div class="app-main">
+        <div class="app-panel is-active" data-panel="overview" id="panel-overview" aria-hidden="false">
+    <section class="hero" id="top">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Prototype 1 · Presbyopia wearable</p>
+          <h1>Smart <em>Magnifying</em> Glove</h1>
+          <p class="lead">
+            Lab for the first bench build: phases, BOM, problems, diary, photos. <a href="concept.html#overview">Full concept →</a>
+          </p>
+          <div class="hero-stats" id="hero-stats">
+            <div class="stat">
+              <span class="stat-value" id="stat-tasks">—</span>
+              <span class="stat-label">Tasks done</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value" id="stat-budget">≈NT$0</span>
+              <span class="stat-label">Logged spend</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value" id="stat-phases">0/5</span>
+              <span class="stat-label">Phases touched</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-card" id="deadline">
+          <div class="countdown-ring" aria-hidden="true">
+            <svg viewBox="0 0 120 120">
+              <circle class="ring-bg" cx="60" cy="60" r="52" />
+              <circle class="ring-fg" id="deadline-ring" cx="60" cy="60" r="52" />
+            </svg>
+            <div class="countdown-center">
+              <span class="countdown-num" id="countdown-days">—</span>
+              <span class="countdown-unit">days left</span>
+            </div>
+          </div>
+          <p class="deadline-title">Prototype target</p>
+          <p class="deadline-date">June 30</p>
+          <p class="deadline-note" id="deadline-message">One gesture at a time.</p>
+        </div>
+      </div>
+    </section>
+        </div>
+        <div class="app-panel" data-panel="vision" id="panel-vision" hidden aria-hidden="true">
+    <section class="section section-vision" id="vision">
+      <div class="section-head">
+        <h2>Sketch &amp; wires</h2>
+      </div>
+      <div class="vision-layout">
+        <article class="card vision-main">
+          <h3>Vision</h3>
+          <p>
+            A smart glove that helps people with presbyopia read small text by providing instant magnification on a wrist-mounted OLED—controlled with natural gestures, no phone required.
+          </p>
+          <ul class="pill-list">
+            <li>Pinch to capture &amp; magnify</li>
+            <li>Digital zoom 2× → 4× → 8×</li>
+            <li>Gesture-only UX</li>
+            <li>Fully wearable</li>
+          </ul>
+        </article>
+        <article class="card vision-tech">
+          <h3>System sketch</h3>
+          <pre class="ascii-diagram" aria-label="Architecture diagram">┌──────────────────────────────────────┐
+│  OV2640 (fingertip) ──► ESP32-S3     │
+│         CSI / FPC        (wrist)     │
+│                          │  │        │
+│  Flex ×5 ──ADC────┘ ├──SPI► OLED     │
+│  MPU6050 ───I2C───────────┘          │
+│  LiPo → TP4056 → 5V/VIN              │
+└──────────────────────────────────────┘</pre>
+        </article>
+      </div>
+      <article class="card vision-circuit">
+        <h3>Circuit diagram</h3>
+        <figure class="vision-circuit-figure">
+          <img
+            src="Circuit.jpg"
+            alt="Prototype 1 wiring diagram: power, ESP32, camera, OLED, MPU6050, and flex sensors"
+            width="1668"
+            height="2157"
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
+      </article>
+      <div class="vision-wires card">
+        <h3>Wire map</h3>
+        <dl class="wire-map">
+          <dt>Power</dt>
+          <dd>
+            <strong>LiPo</strong> red/black → <strong>TP4056</strong> → board <strong>5V/VIN</strong> + <strong>GND</strong> → on-board <strong>3.3V</strong> to OLED, MPU6050, camera. <strong>JST-PH</strong> on the pack for unplug; <strong>JST-SH</strong> is for flex harnesses, not the battery.
+          </dd>
+          <dt>Camera (CSI)</dt>
+          <dd>
+            <strong>FPC ribbon</strong> + many parallel lines + clock/sync; plus <strong>I2C</strong> (SDA/SCL) for sensor setup. This is the “thick” link—usually not all dupont wires.
+          </dd>
+          <dt>OLED (SPI)</dt>
+          <dd>
+            <strong>Bench:</strong> <strong>GPIO18</strong> SCK, <strong>GPIO11</strong> MOSI (many boards label this pad <strong>SDA</strong>), <strong>GPIO17</strong> CS, <strong>GPIO16</strong> DC, <strong>GPIO15</strong> RES/RST (+ 3.3V, GND, backlight). Short jumpers or PCB; confirm vs camera pinout.
+          </dd>
+          <dt>MPU6050 (I2C)</dt>
+          <dd>
+            <strong>SDA → GPIO8</strong>, <strong>SCL → GPIO9</strong>, + 3.3V + GND (MPU-6050). Same bus can share with the camera SCCB if addresses and pull-ups are OK. On <strong>ESP32-S3</strong>, do <strong>not</strong> use <strong>GPIO26–27</strong> for I2C (flash/PSRAM). Use <strong>~4.7 kΩ</strong> pull-ups to 3.3V on SDA/SCL if the module does not. Confirm <strong>GPIO8/9</strong> are free on your camera/dev-kit pinout.
+          </dd>
+          <dt>Flex sensors (ADC)</dt>
+          <dd>
+            <strong>Five</strong> sensors, each a <strong>voltage divider</strong> → one <strong>ADC1</strong> input per channel. <strong>Bench:</strong> <strong>GPIO1, 2, 4, 5, 6</strong>. Keep off <strong>GPIO8/9</strong> (I²C) and <strong>GPIO11, 15–18</strong> (OLED SPI). Recheck USB, camera, strapping (<strong>GPIO0</strong>, <strong>GPIO3</strong>). Finger harness: <strong>JST SH 1.0mm</strong>, not the battery connector.
+          </dd>
+        </dl>
+        <pre class="ascii-diagram ascii-diagram-tight" aria-label="Power and signal flow summary">LiPo → TP4056 → ESP32 5V/VIN → 3.3V/GND → modules
+SPI→OLED (18 SCK · 11 MOSI · 17 CS · 16 DC · 15 RES)  I2C*→MPU+cam  FPC→OV2640  ADC1→flex×5
+*S3: I²C 8/9. ADC1 flex 1·2·4·5·6 — verify vs board.</pre>
+      </div>
+    </section>
+        </div>
+        <div class="app-panel" data-panel="timeline" id="panel-timeline" hidden aria-hidden="true">
+    <section class="section" id="timeline">
+      <div class="section-head">
+        <h2>Timeline &amp; phases</h2>
+      </div>
+      <div class="card timeline-week-tools" id="timeline-week-tools" hidden></div>
+      <div class="timeline" id="timeline-root"></div>
+    </section>
+        </div>
+        <div class="app-panel" data-panel="shopping" id="panel-shopping" hidden aria-hidden="true">
+    <section class="section section-shopping" id="shopping">
+      <div class="section-head">
+        <h2>What to buy</h2>
+      </div>
+      <div class="card shop-add-card">
+        <p class="shop-add-title">Add something to buy</p>
+        <div class="shop-add-grid">
+          <select id="shop-add-category" class="shop-add-field" aria-label="Category">
+            <option value="electronics">Electronics</option>
+            <option value="mechanical">Mechanical</option>
+            <option value="tools">Tools &amp; supplies</option>
+          </select>
+          <input
+            type="text"
+            id="shop-add-item"
+            class="shop-add-field"
+            placeholder="Item name"
+            autocomplete="off"
+          />
+          <input
+            type="text"
+            id="shop-add-part"
+            class="shop-add-field"
+            placeholder="Part / source / notes"
+            autocomplete="off"
+          />
+          <input
+            type="number"
+            id="shop-add-est"
+            class="shop-add-field shop-add-est"
+            min="0"
+            step="1"
+            placeholder="Est. USD"
+            aria-label="Estimated USD (optional)"
+          />
+          <button type="button" class="btn btn-primary" id="shop-add-btn">Add line</button>
+        </div>
+      </div>
+      <div class="shopping-grid">
+        <div class="card shop-block">
+          <h3>Electronics <span class="badge" id="shop-elec-progress"></span></h3>
+          <div class="shop-table-wrap">
+            <table class="shop-table" id="table-electronics"></table>
+          </div>
+        </div>
+        <div class="card shop-block">
+          <h3>Mechanical <span class="badge" id="shop-mech-progress"></span></h3>
+          <div class="shop-table-wrap">
+            <table class="shop-table" id="table-mechanical"></table>
+          </div>
+        </div>
+        <div class="card shop-block">
+          <h3>Tools &amp; supplies <span class="badge" id="shop-tools-progress"></span></h3>
+          <div class="shop-table-wrap">
+            <table class="shop-table" id="table-tools"></table>
+          </div>
+        </div>
+      </div>
+      <div class="card budget-card">
+        <div class="budget-currency-row">
+          <label class="budget-currency-label" for="currency-select">Currency</label>
+          <select id="currency-select" class="budget-currency-select" aria-label="Display currency">
+            <option value="ntd">NTD (NT$)</option>
+            <option value="usd">USD ($)</option>
+          </select>
+          <span class="budget-fx-fixed" title="Fixed for estimates and USD↔NTD toggle">1 USD = 30 NTD</span>
+        </div>
+        <label for="budget-spent">Budget spent (manual)</label>
+        <div class="budget-row">
+          <span class="currency" id="budget-currency-symbol">≈NT$</span>
+          <input type="number" id="budget-spent" min="0" step="1" placeholder="0" />
+          <span class="budget-hint" id="budget-hint">—</span>
+        </div>
+      </div>
+    </section>
+        </div>
+        <div class="app-panel" data-panel="challenges" id="panel-challenges" hidden aria-hidden="true">
+    <section class="section" id="challenges">
+      <div class="section-head">
+        <h2>Risks &amp; technical challenges</h2>
+      </div>
+      <div class="card table-card">
+        <table class="challenge-table" id="challenge-table">
+          <thead>
+            <tr>
+              <th>Challenge</th>
+              <th>Status</th>
+              <th>Solution direction</th>
+              <th>Note</th>
+              <th class="challenge-actions-col" scope="col" aria-label="Actions"></th>
+            </tr>
+          </thead>
+          <tbody id="challenge-body"></tbody>
+        </table>
+        <div class="challenge-add">
+          <p class="challenge-add-label">Add risk or challenge</p>
+          <div class="challenge-add-row">
+            <input
+              type="text"
+              id="challenge-new-name"
+              placeholder="Short name (e.g. EMI on flex lines)"
+              autocomplete="off"
+            />
+            <input
+              type="text"
+              id="challenge-new-solution"
+              placeholder="Planned fix or mitigation"
+              autocomplete="off"
+            />
+            <button type="button" class="btn btn-primary" id="challenge-add-btn">Add</button>
+          </div>
+        </div>
+      </div>
+    </section>
+        </div>
+        <div class="app-panel" data-panel="gallery" id="panel-gallery" hidden aria-hidden="true">
+    <section class="section section-gallery" id="gallery">
+      <div class="section-head">
+        <h2>Pictures</h2>
+      </div>
+      <div class="gallery-toolbar card">
+        <label class="btn btn-primary btn-file">
+          Add photos
+          <input type="file" id="photo-input" accept="image/*" multiple hidden />
+        </label>
+        <div class="drop-zone" id="drop-zone" tabindex="0">
+          <span>Or drag &amp; drop here</span>
+        </div>
+      </div>
+      <div class="gallery-grid" id="gallery-grid"></div>
+      <p class="gallery-hint" id="storage-hint"></p>
+    </section>
+        </div>
+        <div class="app-panel" data-panel="notes" id="panel-notes" hidden aria-hidden="true">
+    <section class="section" id="notes">
+      <div class="section-head">
+        <h2>Notes &amp; ideas</h2>
+      </div>
+      <div class="notes-layout">
+        <div class="card notes-main">
+          <div class="diary-composer">
+            <label class="diary-compose-label" for="diary-compose">New entry</label>
+            <div class="diary-kind" role="group" aria-label="Entry type">
+              <label class="diary-kind-opt">
+                <input type="radio" name="diary-kind" value="note" checked />
+                Note
+              </label>
+              <label class="diary-kind-opt">
+                <input type="radio" name="diary-kind" value="idea" />
+                Idea
+              </label>
+            </div>
+            <textarea
+              id="diary-compose"
+              rows="6"
+              placeholder="New entry—timestamped on Add"
+            ></textarea>
+            <div class="diary-compose-actions">
+              <button type="button" class="btn btn-primary" id="diary-add">Add to diary</button>
+              <span class="save-indicator" id="diary-saved" aria-live="polite"></span>
+            </div>
+            <p class="diary-shortcut-hint"><kbd>Ctrl</kbd>+<kbd>Enter</kbd> / <kbd>⌘</kbd>+<kbd>Enter</kbd> — Add</p>
+          </div>
+          <div id="diary-stream" class="diary-stream" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+        </div>
+        <div class="app-panel" data-panel="links" id="panel-links" hidden aria-hidden="true">
+    <section class="section" id="links">
+      <div class="section-head">
+        <h2>Links &amp; resources</h2>
+      </div>
+      <div class="card links-card">
+        <ul class="links-list" id="links-list"></ul>
+        <form class="link-add" id="link-form">
+          <input type="url" name="url" required placeholder="https://…" />
+          <input type="text" name="title" placeholder="Label (optional)" />
+          <button type="submit" class="btn btn-primary">Add link</button>
+        </form>
+      </div>
+    </section>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div
+    id="lightbox"
+    class="lightbox"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Enlarged photo"
+    hidden
+  >
+    <button type="button" class="lightbox-backdrop" aria-label="Close preview"></button>
+    <div class="lightbox-panel">
+      <button type="button" class="lightbox-close" aria-label="Close">×</button>
+      <div class="lightbox-img-wrap">
+        <img id="lightbox-img" class="lightbox-img" src="" alt="" />
+      </div>
+      <p id="lightbox-caption" class="lightbox-caption" hidden></p>
+    </div>
+  </div>
+
+  <script src="js/shell.js"></script>
+  <script src="js/seed.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

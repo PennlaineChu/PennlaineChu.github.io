@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Smart Magnifying Glove — Concept</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="page-concept">
+  <div class="noise" aria-hidden="true"></div>
+  <header class="site-header site-header--shell">
+    <div class="header-inner">
+      <a href="concept.html#overview" class="logo">
+        <span class="logo-icon" aria-hidden="true">⌖</span>
+        <span class="logo-text">Magnify Lab</span>
+      </a>
+      <span class="header-page-label">Concept</span>
+    </div>
+  </header>
+
+  <main>
+    <div class="app-shell">
+      <aside class="app-sidebar" aria-label="Concept sections">
+        <nav class="app-sidebar-nav">
+          <a href="index.html#overview" class="app-sidebar-external">Prototype lab</a>
+          <button type="button" class="app-sidebar-link is-active" data-panel-target="overview" aria-pressed="true">Intro</button>
+          <button type="button" class="app-sidebar-link" data-panel-target="problem" aria-pressed="false">Why</button>
+          <button type="button" class="app-sidebar-link" data-panel-target="vision" aria-pressed="false">Vision</button>
+          <button type="button" class="app-sidebar-link" data-panel-target="system" aria-pressed="false">System</button>
+          <button type="button" class="app-sidebar-link" data-panel-target="gestures" aria-pressed="false">Gestures</button>
+          <button type="button" class="app-sidebar-link" data-panel-target="roadmap" aria-pressed="false">Roadmap</button>
+          <button type="button" class="app-sidebar-link" data-panel-target="future" aria-pressed="false">Later</button>
+        </nav>
+      </aside>
+      <div class="app-main">
+        <div class="app-panel is-active" data-panel="overview" id="panel-overview" aria-hidden="false">
+    <section class="hero hero--concept" id="top">
+      <p class="eyebrow">Wearable · Presbyopia · Gesture-first</p>
+      <h1>Smart <em>Magnifying</em> Glove</h1>
+      <p class="lead">
+        End-to-end concept: fingertip camera, wrist MCU + OLED, flex and IMU input—magnify small text without pulling out a phone.
+      </p>
+      <div class="hero-actions">
+        <a href="index.html#overview" class="btn btn-primary">Prototype 1 lab</a>
+        <span class="hero-actions-hint">Checklist, BOM, diary, photos</span>
+      </div>
+    </section>
+        </div>
+        <div class="app-panel" data-panel="problem" id="panel-problem" hidden aria-hidden="true">
+    <section class="section" id="problem">
+      <div class="section-head">
+        <h2>Problem</h2>
+      </div>
+      <div class="card">
+        <p>
+          Presbyopia makes near text hard to read. A phone works, but it breaks flow—unlock, frame, zoom. The target is a self-contained glove: glance at the wrist, pinch to grab a readable view, stay hands-on with the page or part.
+        </p>
+      </div>
+    </section>
+        </div>
+        <div class="app-panel" data-panel="vision" id="panel-vision" hidden aria-hidden="true">
+    <section class="section section-vision" id="vision">
+      <div class="section-head">
+        <h2>Vision</h2>
+      </div>
+      <div class="vision-layout">
+        <article class="card vision-main">
+          <h3>Goals</h3>
+          <ul class="pill-list">
+            <li>Pinch to capture &amp; magnify</li>
+            <li>Digital zoom 2× → 4× → 8×</li>
+            <li>Gesture-only UX on the device</li>
+            <li>Fully wearable stack</li>
+          </ul>
+        </article>
+        <article class="card vision-tech">
+          <h3>Prototype 1 scope</h3>
+          <p>
+            First milestone is a bench proof: ESP32-S3, OV2640, ST7789 OLED—stable camera-to-display path and sane latency. Flex, IMU, glove integration, and polish follow in later phases (tracked in the lab).
+          </p>
+        </article>
+      </div>
+    </section>
+        </div>
+        <div class="app-panel" data-panel="system" id="panel-system" hidden aria-hidden="true">
+    <section class="section" id="system">
+      <div class="section-head">
+        <h2>System</h2>
+      </div>
+      <article class="card">
+        <h3>Block diagram</h3>
+        <pre class="ascii-diagram ascii-diagram-wide" aria-label="Smart glove system diagram">┌─────────────────────────────────────────────────────────────────┐
+│                     SMART MAGNIFYING GLOVE                       │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│   ┌──────────────┐         ┌──────────────┐                     │
+│   │ OV2640       │  CSI    │ ESP32-S3     │                     │
+│   │ (fingertip)  │────────►│ (wrist MCU)  │                     │
+│   └──────────────┘         └──────┬───────┘                     │
+│                                   │                             │
+│   ┌──────────────┐                │     ┌──────────────┐        │
+│   │ Flex ×5      │───ADC1───────►│────►│ 1.69" OLED   │        │
+│   └──────────────┘                │ SPI │ 240×280      │        │
+│                                   │     └──────────────┘        │
+│   ┌──────────────┐                │                             │
+│   │ MPU6050      │────I2C────────►│                             │
+│   └──────────────┘                │                             │
+│                                   │                             │
+│   ┌──────────────┐         ┌──────┴──────┐                      │
+│   │ LiPo         │────────►│ TP4056      │                      │
+│   └──────────────┘         └─────────────┘                      │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘</pre>
+        <p class="concept-signal-note">
+          Arrows are signal roles (power, SPI, I2C, CSI/FPC, ADC1)—not one cable type each. Bench GPIOs for ESP32-S3 are on the <a href="index.html#vision">lab page</a> (<em>Sketch &amp; wires</em>).
+        </p>
+      </article>
+    </section>
+        </div>
+        <div class="app-panel" data-panel="gestures" id="panel-gestures" hidden aria-hidden="true">
+    <section class="section" id="gestures">
+      <div class="section-head">
+        <h2>Gesture map (target)</h2>
+      </div>
+      <div class="card">
+        <div class="concept-table-wrap">
+          <table class="concept-table">
+            <thead>
+              <tr>
+                <th>Finger / pose</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>All fingers curled</td>
+                <td>Sleep — OLED off, camera idle</td>
+              </tr>
+              <tr>
+                <td>Thumb + index pinch</td>
+                <td>Capture frame → magnified view</td>
+              </tr>
+              <tr>
+                <td>Thumb + middle pinch</td>
+                <td>Zoom step 2× → 4× → 8×</td>
+              </tr>
+              <tr>
+                <td>Thumb + ring pinch</td>
+                <td>Toggle fingertip LEDs</td>
+              </tr>
+              <tr>
+                <td>Open palm</td>
+                <td>Live preview</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+        </div>
+        <div class="app-panel" data-panel="roadmap" id="panel-roadmap" hidden aria-hidden="true">
+    <section class="section" id="roadmap">
+      <div class="section-head">
+        <h2>Roadmap</h2>
+      </div>
+      <p class="roadmap-lead">Five phases from procurement through software polish. Task checkboxes and dates sit in the lab.</p>
+      <div class="concept-roadmap">
+        <article class="card concept-phase-card">
+          <h3>Phase 0</h3>
+          <p class="concept-phase-meta">Planning &amp; procurement · week 0</p>
+          <p>Research, order parts, bench toolchain.</p>
+        </article>
+        <article class="card concept-phase-card">
+          <h3>Phase 1</h3>
+          <p class="concept-phase-meta">Proof of concept · weeks 1–2</p>
+          <p>Camera → OLED pipeline on the dev board; frame rate and latency baseline.</p>
+        </article>
+        <article class="card concept-phase-card">
+          <h3>Phase 2</h3>
+          <p class="concept-phase-meta">Sensor integration · weeks 3–4</p>
+          <p>Flex ADC, smoothing, calibration, gesture state machine.</p>
+        </article>
+        <article class="card concept-phase-card">
+          <h3>Phase 3</h3>
+          <p class="concept-phase-meta">Wearable integration · weeks 5–8</p>
+          <p>PCB, glove, TPU housing, harnesses, on-body assembly.</p>
+        </article>
+        <article class="card concept-phase-card">
+          <h3>Phase 4</h3>
+          <p class="concept-phase-meta">Software &amp; tuning · weeks 9–10</p>
+          <p>Zoom, focus peaking, power modes, optional OCR—target ~15 fps preview, low capture latency.</p>
+        </article>
+      </div>
+    </section>
+        </div>
+        <div class="app-panel" data-panel="future" id="panel-future" hidden aria-hidden="true">
+    <section class="section" id="future">
+      <div class="section-head">
+        <h2>After prototype 1</h2>
+      </div>
+      <div class="card">
+        <ul class="pill-list">
+          <li>Haptic feedback for gesture confirmation</li>
+          <li>Bluetooth to phone for saving images</li>
+          <li>Voice commands</li>
+          <li>High-contrast / night display modes</li>
+          <li>On-device text detection (ML)</li>
+        </ul>
+      </div>
+    </section>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/shell.js"></script>
+</body>
+</html>

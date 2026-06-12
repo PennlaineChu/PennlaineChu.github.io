@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design — Diary Camera Progress</title>
+    <link rel="stylesheet" href="shared.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <div class="nav-brand">Diary Camera</div>
+            <div class="nav-links">
+                <a class="nav-link" href="index.html">Dashboard</a>
+                <a class="nav-link" href="hardware.html">Hardware</a>
+                <a class="nav-link" href="firmware.html">Firmware</a>
+                <a class="nav-link" href="software.html">Software</a>
+                <a class="nav-link active" href="design.html">Design</a>
+                <a class="nav-link" href="lab-notes.html">Lab Notes</a>
+                <a class="nav-link" href="gallery.html">Gallery</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Design &amp; Manufacturing</h1>
+            <p>Onshape CAD, "soft pebble" aesthetic, acoustic design, 3D printing</p>
+        </div>
+
+        <div class="card">
+            <div class="card-header design">
+                <h2>CAD &amp; Manufacturing Tasks</h2>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+                </div>
+                <span class="progress-text" id="progress-text">0%</span>
+            </div>
+            <div class="card-content">
+                <ul class="checklist">
+                    <li class="checklist-item" data-id="des1">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">Onshape CAD foundation</div>
+                            <div class="item-meta">
+                                <span class="tag">CAD</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item" data-id="des2">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">"Soft pebble" organic lofts</div>
+                            <div class="item-meta">
+                                <span class="tag">Aesthetic</span>
+                                <span class="tag insight">Luxury compact</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item" data-id="des3">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">Internal Z-axis stack layout</div>
+                            <div class="item-meta">
+                                <span class="tag">Layout</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item" data-id="des4">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">Acoustic port (1.0-1.5mm)</div>
+                            <div class="item-meta">
+                                <span class="tag">Acoustic</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item" data-id="des5">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">Speaker grille pattern</div>
+                            <div class="item-meta">
+                                <span class="tag">Acoustic</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item" data-id="des6">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">Heat-set insert bosses</div>
+                            <div class="item-meta">
+                                <span class="tag">DfA</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item" data-id="des7">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">USB-C port cutout</div>
+                            <div class="item-meta">
+                                <span class="tag">Feature</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item" data-id="des8">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">3D print test (SLA/FDM)</div>
+                            <div class="item-meta">
+                                <span class="tag">Prototype</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item" data-id="des9">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">Final surface finish</div>
+                            <div class="item-meta">
+                                <span class="tag">Finish</span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>Engineering Spikes — Design Narrative</h2>
+            </div>
+            <div class="card-content">
+                <ul class="checklist" id="spikes-list">
+                    <li class="checklist-item" data-id="spike1">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">Signal integrity — Dedicated I2S chain</div>
+                            <div class="item-meta">
+                                <span class="tag insight">Admissions Spike</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item" data-id="spike2">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">NVUI — 8-pixel WS2812 state machine</div>
+                            <div class="item-meta">
+                                <span class="tag insight">Admissions Spike</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item" data-id="spike3">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">Design for Assembly — Heat-set inserts</div>
+                            <div class="item-meta">
+                                <span class="tag insight">Admissions Spike</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item" data-id="spike4">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">Memory architecture — PSRAM buffering</div>
+                            <div class="item-meta">
+                                <span class="tag insight">Admissions Spike</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item" data-id="spike5">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">Acoustic MEMS integration</div>
+                            <div class="item-meta">
+                                <span class="tag insight">Admissions Spike</span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>Acoustic Design Notes (INMP441)</h2>
+            </div>
+            <div class="card-content">
+                <table style="width: 100%; border-collapse: collapse; color: var(--text-secondary);">
+                    <thead>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <th style="text-align: left; padding: 0.75rem;">Concern</th>
+                            <th style="text-align: left; padding: 0.75rem;">Solution</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 0.75rem; color: var(--text-primary);">Port alignment</td>
+                            <td style="padding: 0.75rem;">1.0-1.5mm acoustic port aligned with MEMS inlet</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.75rem; color: var(--text-primary);">Sealed back cavity</td>
+                            <td style="padding: 0.75rem;">Gasket ring (closed-cell silicone/TPU)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.75rem; color: var(--text-primary);">Wind/plosive noise</td>
+                            <td style="padding: 0.75rem;">Acoustic mesh (stainless or sintered PTFE)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.75rem; color: var(--text-primary);">Vibration isolation</td>
+                            <td style="padding: 0.75rem;">Soft standoffs or silicone pad</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.75rem; color: var(--text-primary);">Speaker crosstalk</td>
+                            <td style="padding: 0.75rem;">Mic &amp; speaker on opposite faces (>20mm separation)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.75rem; color: var(--text-primary);">Port tube length</td>
+                            <td style="padding: 0.75rem;">Keep ≤2mm (wall thickness) to avoid Helmholtz resonance</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>Design Specs</h2>
+            </div>
+            <div class="card-content">
+                <ul style="color: var(--text-secondary); line-height: 2;">
+                    <li><strong style="color: var(--text-primary);">Style:</strong> "Soft pebble" / luxury compact — no boxy edges</li>
+                    <li><strong style="color: var(--text-primary);">Wall thickness:</strong> 2-3mm</li>
+                    <li><strong style="color: var(--text-primary);">Top surface:</strong> Kailh Box shutter (centered, proud recess) + SPDT slide switch (rear)</li>
+                    <li><strong style="color: var(--text-primary);">Bottom edge:</strong> USB-C port (TP4056 charge)</li>
+                    <li><strong style="color: var(--text-primary);">Bottom face:</strong> Speaker grille</li>
+                    <li><strong style="color: var(--text-primary);">Internal:</strong> Z-axis sandwich — WS2812 ring + camera → MCU/battery → speaker</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="shared.js"></script>
+    <script>
+        loadState();
+        initChecklist();
+
+        // Update progress bar
+        const desItems = ['des1','des2','des3','des4','des5','des6','des7','des8','des9'];
+        const completed = desItems.filter(id => isCompleted(id)).length;
+        const pct = Math.round(completed / desItems.length * 100);
+        document.getElementById('progress-fill').style.width = pct + '%';
+        document.getElementById('progress-text').textContent = pct + '%';
+    </script>
+</body>
+</html>

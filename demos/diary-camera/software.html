@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software — Diary Camera Progress</title>
+    <link rel="stylesheet" href="shared.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <div class="nav-brand">Diary Camera</div>
+            <div class="nav-links">
+                <a class="nav-link" href="index.html">Dashboard</a>
+                <a class="nav-link" href="hardware.html">Hardware</a>
+                <a class="nav-link" href="firmware.html">Firmware</a>
+                <a class="nav-link active" href="software.html">Software</a>
+                <a class="nav-link" href="design.html">Design</a>
+                <a class="nav-link" href="lab-notes.html">Lab Notes</a>
+                <a class="nav-link" href="gallery.html">Gallery</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Software &amp; Backend</h1>
+            <p>Flask API, AI integration, gallery, and deployment</p>
+        </div>
+
+        <div class="card">
+            <div class="card-header software">
+                <h2>Development Tasks</h2>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+                </div>
+                <span class="progress-text" id="progress-text">0%</span>
+            </div>
+            <div class="card-content">
+                <ul class="checklist">
+                    <li class="checklist-item" data-id="sw1">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">Flask API endpoint</div>
+                            <div class="item-meta">
+                                <span class="tag">Backend</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item" data-id="sw2">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">Multipart upload handler</div>
+                            <div class="item-meta">
+                                <span class="tag">API</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item" data-id="sw3">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">GPT-4o / Gemini Vision integration</div>
+                            <div class="item-meta">
+                                <span class="tag">AI</span>
+                                <span class="tag">Multimodal</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item" data-id="sw4">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">TTS for AI responses</div>
+                            <div class="item-meta">
+                                <span class="tag">Audio</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item" data-id="sw5">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">Gallery web interface</div>
+                            <div class="item-meta">
+                                <span class="tag">Frontend</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item" data-id="sw6">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">QR code generation</div>
+                            <div class="item-meta">
+                                <span class="tag">UX</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item" data-id="sw7">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">Database schema</div>
+                            <div class="item-meta">
+                                <span class="tag">Data</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item" data-id="sw8">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">Mobile-responsive design</div>
+                            <div class="item-meta">
+                                <span class="tag">UI/UX</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item" data-id="sw9">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">Cloud deployment</div>
+                            <div class="item-meta">
+                                <span class="tag">DevOps</span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>Data Flow</h2>
+            </div>
+            <div class="card-content">
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; flex-wrap: wrap; color: var(--text-secondary);">
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem;">📸</div>
+                        <div>Capture</div>
+                    </div>
+                    <div style="color: var(--accent-blue);">→</div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem;">🎙️</div>
+                        <div>Audio</div>
+                    </div>
+                    <div style="color: var(--accent-blue);">→</div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem;">💾</div>
+                        <div>Buffer</div>
+                    </div>
+                    <div style="color: var(--accent-blue);">→</div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem;">⬆️</div>
+                        <div>Upload</div>
+                    </div>
+                    <div style="color: var(--accent-blue);">→</div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem;">🤖</div>
+                        <div>AI</div>
+                    </div>
+                    <div style="color: var(--accent-blue);">→</div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem;">🔊</div>
+                        <div>Speak</div>
+                    </div>
+                    <div style="color: var(--accent-blue);">→</div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem;">🖼️</div>
+                        <div>Gallery</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>Quick Links</h2>
+            </div>
+            <div class="card-content">
+                <dl style="color: var(--text-secondary);">
+                    <dt style="color: var(--text-primary); margin-top: 0.75rem;">Onshape CAD</dt>
+                    <dd><a href="#" style="color: var(--accent-blue);">TBD — Add public link</a></dd>
+
+                    <dt style="color: var(--text-primary); margin-top: 0.75rem;">Firmware Repo</dt>
+                    <dd><a href="#" style="color: var(--accent-blue);">TBD — Add GitHub repo</a></dd>
+
+                    <dt style="color: var(--text-primary); margin-top: 0.75rem;">Flask Service</dt>
+                    <dd><a href="#" style="color: var(--accent-blue);">TBD — Add deployment notes</a></dd>
+
+                    <dt style="color: var(--text-primary); margin-top: 0.75rem;">Public Gallery</dt>
+                    <dd><a href="#" style="color: var(--accent-blue);">TBD — Gallery URL for QR</a></dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+
+    <script src="shared.js"></script>
+    <script>
+        loadState();
+        initChecklist();
+
+        // Update progress bar
+        const swItems = ['sw1','sw2','sw3','sw4','sw5','sw6','sw7','sw8','sw9'];
+        const completed = swItems.filter(id => isCompleted(id)).length;
+        const pct = Math.round(completed / swItems.length * 100);
+        document.getElementById('progress-fill').style.width = pct + '%';
+        document.getElementById('progress-text').textContent = pct + '%';
+    </script>
+</body>
+</html>

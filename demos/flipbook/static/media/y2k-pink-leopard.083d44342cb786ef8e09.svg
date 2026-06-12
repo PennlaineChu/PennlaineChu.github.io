@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="540" height="960" viewBox="0 0 540 960" preserveAspectRatio="xMidYMid slice">
+  <!--
+    Y2K pink leopard — matches Pinterest reference template 13
+    (#SWAG leopard + hot pink). Warm tan ground with a tileable
+    leopard spot pattern; hot-pink bleed at the top for that
+    "click 2 cry" ribbon vibe.
+  -->
+  <defs>
+    <!-- leopard spot tile: irregular black rings around tan+brown centers -->
+    <pattern id="pl-leopard" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+      <rect width="80" height="80" fill="#e6c38a"/>
+      <!-- brown centers -->
+      <ellipse cx="18" cy="18" rx="8" ry="7"   fill="#a06a32"/>
+      <ellipse cx="52" cy="32" rx="7"  ry="6"  fill="#8a5a28"/>
+      <ellipse cx="30" cy="56" rx="9"  ry="6"  fill="#a06a32"/>
+      <ellipse cx="64" cy="62" rx="6"  ry="5"  fill="#8a5a28"/>
+      <ellipse cx="8"  cy="48" rx="5"  ry="4"  fill="#a06a32"/>
+      <!-- black broken rings around each center -->
+      <path d="M10 14 q 8 -10, 18 -2 q 8 8, -2 16 q -10 8, -18 0 q -6 -8, 2 -14 Z" fill="none" stroke="#1a0f0a" stroke-width="2.2"/>
+      <path d="M45 28 q 6 -8, 14 -2 q 6 6, 0 14 q -8 6, -14 0 q -4 -6, 0 -12 Z" fill="none" stroke="#1a0f0a" stroke-width="2"/>
+      <path d="M22 52 q 8 -8, 18 0 q 6 8, -2 14 q -10 6, -16 0 q -6 -6, 0 -14 Z" fill="none" stroke="#1a0f0a" stroke-width="2"/>
+      <path d="M58 58 q 6 -6, 12 0 q 4 6, -2 12 q -6 4, -12 0 q -4 -6, 2 -12 Z" fill="none" stroke="#1a0f0a" stroke-width="1.8"/>
+      <path d="M3  44 q 4 -6, 10 -2 q 4 4, 0 10 q -6 4, -10 0 q -2 -4, 0 -8 Z" fill="none" stroke="#1a0f0a" stroke-width="1.6"/>
+    </pattern>
+    <filter id="pl-grain">
+      <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.12 0"/>
+    </filter>
+  </defs>
+  <rect width="540" height="960" fill="url(#pl-leopard)"/>
+  <!-- hot-pink bleed at top -->
+  <rect width="540" height="180" fill="#ff2e8a" opacity="0.95"/>
+  <rect width="540" height="30"  y="150" fill="#ff2e8a" opacity="0.6"/>
+  <rect width="540" height="10"  y="178" fill="#0a0a0a" opacity="0.25"/>
+  <!-- hot-pink bleed at bottom -->
+  <rect width="540" height="140" y="820" fill="#ff2e8a" opacity="0.9"/>
+  <rect width="540" height="20"  y="800" fill="#ff2e8a" opacity="0.5"/>
+  <rect width="540" height="960" filter="url(#pl-grain)"/>
+</svg>

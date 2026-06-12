@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery — Diary Camera Progress</title>
+    <link rel="stylesheet" href="shared.css">
+    <style>
+        .gallery-item {
+            position: relative;
+            cursor: pointer;
+            border-radius: 8px;
+            overflow: hidden;
+            aspect-ratio: 1;
+            background: var(--bg-secondary);
+        }
+        .gallery-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .photo-meta {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            padding: 2rem 0.75rem 0.75rem;
+            font-size: 0.75rem;
+        }
+        .photo-name {
+            color: var(--text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 0.25rem;
+        }
+        .photo-date {
+            color: var(--text-secondary);
+        }
+        .delete-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: var(--accent-red);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 0.3rem 0.5rem;
+            font-size: 0.7rem;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .gallery-item:hover .delete-btn {
+            opacity: 1;
+        }
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+        .lightbox.active {
+            display: flex;
+        }
+        .lightbox-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+        }
+        .lightbox img {
+            max-width: 100%;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: -3rem;
+            right: 0;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+        .lightbox-close:hover {
+            color: var(--accent-red);
+        }
+        .lightbox-caption {
+            text-align: center;
+            margin-top: 1rem;
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <div class="nav-brand">Diary Camera</div>
+            <div class="nav-links">
+                <a class="nav-link" href="index.html">Dashboard</a>
+                <a class="nav-link" href="hardware.html">Hardware</a>
+                <a class="nav-link" href="firmware.html">Firmware</a>
+                <a class="nav-link" href="software.html">Software</a>
+                <a class="nav-link" href="design.html">Design</a>
+                <a class="nav-link" href="lab-notes.html">Lab Diary</a>
+                <a class="nav-link active" href="gallery.html">Gallery</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Build Photos</h1>
+            <p>Document prototypes, test prints, and build progress</p>
+        </div>
+
+        <div class="card">
+            <div class="card-content">
+                <div style="border: 2px dashed var(--border); border-radius: 8px; padding: 2rem; text-align: center; margin-bottom: 1.5rem;">
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">Drop photos here or click to browse</p>
+                    <button class="btn btn-primary" onclick="document.getElementById('photo-input').click()">Add Photos</button>
+                    <input type="file" id="photo-input" accept="image/*" multiple style="display:none" onchange="handlePhotoUpload(event)">
+                    <p id="storage-info" style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-secondary);">Storage: calculating...</p>
+                </div>
+
+                <div class="gallery" id="gallery">
+                    <!-- Photos rendered here -->
+                </div>
+
+                <div id="empty-state" style="text-align: center; padding: 3rem; color: var(--text-secondary); display: none;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">📷</div>
+                    <p>No photos yet. Add your first build photo above!</p>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 1rem; background: var(--bg-secondary); border-radius: 8px; font-size: 0.85rem; color: var(--text-secondary);">
+                    <strong style="color: var(--text-primary);">💡 Tip:</strong> Browser storage is limited (~5-10MB). For many photos, use the <a href="index.html" style="color: var(--accent-blue);">Export</a> feature to backup, then delete old photos to free space.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+        <div class="lightbox-content" onclick="event.stopPropagation()">
+            <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+            <img id="lightbox-img" src="" alt="">
+            <div class="lightbox-caption">
+                <div id="lightbox-name" style="color: var(--text-primary); margin-bottom: 0.25rem;"></div>
+                <div id="lightbox-date" style="font-size: 0.85rem;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="shared.js"></script>
+    <script>
+        loadState();
+        renderGallery();
+        updateStorageInfo();
+
+        function renderGallery() {
+            const gallery = document.getElementById('gallery');
+            const emptyState = document.getElementById('empty-state');
+
+            if (appState.photos.length === 0) {
+                gallery.innerHTML = '';
+                emptyState.style.display = 'block';
+                return;
+            }
+
+            emptyState.style.display = 'none';
+            gallery.innerHTML = appState.photos.map(photo => `
+                <div class="gallery-item" onclick="openLightbox(${photo.id})">
+                    <img src="${photo.src}" alt="${escapeHtml(photo.caption)}">
+                    <div class="photo-meta">
+                        <div class="photo-name">${escapeHtml(photo.caption)}</div>
+                        <div class="photo-date">${photo.uploadedAt || 'Unknown date'}</div>
+                    </div>
+                    <button class="delete-btn" onclick="deletePhotoEntry(event, ${photo.id})">Delete</button>
+                </div>
+            `).join('');
+        }
+
+        async function handlePhotoUpload(event) {
+            const files = Array.from(event.target.files);
+            let added = 0;
+            let errors = [];
+
+            for (const file of files) {
+                try {
+                    const dataUrl = await readFile(file);
+                    addPhoto(file.name, dataUrl);
+                    added++;
+                } catch (e) {
+                    errors.push(file.name + ': ' + e.message);
+                }
+            }
+
+            renderGallery();
+            updateStorageInfo();
+
+            if (errors.length > 0) {
+                alert('Could not add ' + errors.length + ' photo(s):\n' + errors.join('\n'));
+            }
+
+            event.target.value = '';
+        }
+
+        function readFile(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = (e) => resolve(e.target.result);
+                reader.onerror = () => reject('Failed to read file');
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function updateStorageInfo() {
+            const info = getStorageInfo();
+            document.getElementById('storage-info').textContent =
+                `Storage: ${info.used} used · ${info.photos} photos`;
+        }
+
+        function deletePhotoEntry(event, id) {
+            event.stopPropagation();
+            if (confirm('Delete this photo?')) {
+                deletePhoto(id);
+                renderGallery();
+            }
+        }
+
+        function openLightbox(id) {
+            const photo = appState.photos.find(p => p.id === id);
+            if (!photo) return;
+
+            document.getElementById('lightbox-img').src = photo.src;
+            document.getElementById('lightbox-name').textContent = photo.caption;
+            document.getElementById('lightbox-date').textContent = photo.uploadedAt || '';
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(event) {
+            if (!event || event.target === document.getElementById('lightbox')) {
+                document.getElementById('lightbox').classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+</body>
+</html>

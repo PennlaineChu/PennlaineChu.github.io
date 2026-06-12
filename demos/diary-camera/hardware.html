@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hardware — Diary Camera Progress</title>
+    <link rel="stylesheet" href="shared.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <div class="nav-brand">Diary Camera</div>
+            <div class="nav-links">
+                <a class="nav-link" href="index.html">Dashboard</a>
+                <a class="nav-link active" href="hardware.html">Hardware</a>
+                <a class="nav-link" href="firmware.html">Firmware</a>
+                <a class="nav-link" href="software.html">Software</a>
+                <a class="nav-link" href="design.html">Design</a>
+                <a class="nav-link" href="lab-notes.html">Lab Notes</a>
+                <a class="nav-link" href="gallery.html">Gallery</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Hardware Engineering</h1>
+            <p>BOM assembly, circuit integration, and mechanical build</p>
+        </div>
+
+        <div class="card">
+            <div class="card-header hardware">
+                <h2>Component Checklist</h2>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+                </div>
+                <span class="progress-text" id="progress-text">0%</span>
+            </div>
+            <div class="card-content">
+                <ul class="checklist">
+                    <li class="checklist-item" data-id="hw1">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">ESP32-S3-WROOM-1 integration</div>
+                            <div class="item-meta">
+                                <span class="tag">MCU</span>
+                                <span class="tag">Critical</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item" data-id="hw2">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">OV2640 camera module mounting</div>
+                            <div class="item-meta">
+                                <span class="tag">Vision</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item" data-id="hw3">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">WS2812 8-LED ring assembly</div>
+                            <div class="item-meta">
+                                <span class="tag">NVUI</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item" data-id="hw4">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">INMP441 I2S microphone integration</div>
+                            <div class="item-meta">
+                                <span class="tag">Audio In</span>
+                                <span class="tag insight">Acoustic Design</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item" data-id="hw5">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">MAX98357A + speaker output</div>
+                            <div class="item-meta">
+                                <span class="tag">Audio Out</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item" data-id="hw6">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">Kailh Box shutter switch</div>
+                            <div class="item-meta">
+                                <span class="tag">Input</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item" data-id="hw7">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">SPDT power switch</div>
+                            <div class="item-meta">
+                                <span class="tag">Power</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item" data-id="hw8">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">TP4056 USB-C charging circuit</div>
+                            <div class="item-meta">
+                                <span class="tag">Power</span>
+                                <span class="tag">LiPo</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item" data-id="hw9">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">MicroSD card slot integration</div>
+                            <div class="item-meta">
+                                <span class="tag">Storage</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item" data-id="hw10">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">M2 heat-set inserts &amp; assembly</div>
+                            <div class="item-meta">
+                                <span class="tag">DfA</span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>Hardware BOM Reference</h2>
+            </div>
+            <div class="card-content">
+                <table style="width: 100%; border-collapse: collapse; color: var(--text-secondary);">
+                    <thead>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <th style="text-align: left; padding: 0.5rem;">Subsystem</th>
+                            <th style="text-align: left; padding: 0.5rem;">Part/Spec</th>
+                            <th style="text-align: left; padding: 0.5rem;">Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 0.5rem; color: var(--text-primary);">MCU</td>
+                            <td style="padding: 0.5rem;">ESP32-S3-WROOM-1 (8MB PSRAM)</td>
+                            <td style="padding: 0.5rem;">AI + audio multitasking</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.5rem; color: var(--text-primary);">Vision</td>
+                            <td style="padding: 0.5rem;">OV2640 camera module (2MP)</td>
+                            <td style="padding: 0.5rem;"></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.5rem; color: var(--text-primary);">NVUI</td>
+                            <td style="padding: 0.5rem;">WS2812 addressable RGB ring (8 LEDs)</td>
+                            <td style="padding: 0.5rem;">Single-wire, patterns: solid/pulse/chase/rainbow</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.5rem; color: var(--text-primary);">Audio In</td>
+                            <td style="padding: 0.5rem;">INMP441 I2S digital MEMS mic</td>
+                            <td style="padding: 0.5rem;">Voice diary entries</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.5rem; color: var(--text-primary);">Audio Out</td>
+                            <td style="padding: 0.5rem;">MAX98357A + 1W 8ohm speaker</td>
+                            <td style="padding: 0.5rem;">AI "critiques"</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.5rem; color: var(--text-primary);">Input</td>
+                            <td style="padding: 0.5rem;">Kailh Box mechanical switch</td>
+                            <td style="padding: 0.5rem;">Top-mounted, index-finger ergonomics</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.5rem; color: var(--text-primary);">Power Switch</td>
+                            <td style="padding: 0.5rem;">SPDT slide switch</td>
+                            <td style="padding: 0.5rem;">Hard on/off, cuts LiPo to MCU</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.5rem; color: var(--text-primary);">Storage</td>
+                            <td style="padding: 0.5rem;">MicroSDHC 128MB-1GB Class 10 FAT32</td>
+                            <td style="padding: 0.5rem;"></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.5rem; color: var(--text-primary);">Power/Charge</td>
+                            <td style="padding: 0.5rem;">3.7V LiPo + TP4056 USB-C + DW01</td>
+                            <td style="padding: 0.5rem;">500-1000mAh</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.5rem; color: var(--text-primary);">Assembly</td>
+                            <td style="padding: 0.5rem;">M2 screws + brass heat-set inserts</td>
+                            <td style="padding: 0.5rem;">DfA, repairable</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="shared.js"></script>
+    <script>
+        loadState();
+        initChecklist();
+
+        // Update progress bar
+        const hwItems = ['hw1','hw2','hw3','hw4','hw5','hw6','hw7','hw8','hw9','hw10'];
+        const completed = hwItems.filter(id => isCompleted(id)).length;
+        const pct = Math.round(completed / hwItems.length * 100);
+        document.getElementById('progress-fill').style.width = pct + '%';
+        document.getElementById('progress-text').textContent = pct + '%';
+    </script>
+</body>
+</html>

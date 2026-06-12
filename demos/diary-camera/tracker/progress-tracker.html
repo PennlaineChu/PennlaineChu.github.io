@@ -1,0 +1,1970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diary Camera — Engineering Progress Tracker</title>
+    <style>
+        :root {
+            /* Soft cream & blush palette — minimalist, warm, feminine */
+            --bg-primary: #fdf8f5;        /* warm ivory */
+            --bg-secondary: #f7ece6;      /* pale peach */
+            --bg-card: #ffffff;           /* clean white card */
+            --accent-blue: #d48ea3;       /* dusty rose (primary) */
+            --accent-purple: #c9a3c9;     /* soft mauve */
+            --accent-green: #a8c5a0;      /* sage */
+            --accent-orange: #e8b38c;     /* warm peach */
+            --accent-red: #d77a7a;        /* muted terracotta */
+            --text-primary: #3d2f2f;      /* cocoa ink */
+            --text-secondary: #8a7872;    /* soft taupe */
+            --border: #f0dcd2;            /* blush border */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            background:
+                radial-gradient(circle at 15% 0%, #fce4ec 0%, transparent 50%),
+                radial-gradient(circle at 90% 100%, #f8e0d0 0%, transparent 55%),
+                var(--bg-primary);
+            background-attachment: fixed;
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            padding: 3rem 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 2rem;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .tagline {
+            font-style: italic;
+            margin-top: 0.5rem;
+        }
+
+        /* Stats Overview */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 18px rgba(212, 142, 163, 0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(212, 142, 163, 0.14);
+        }
+
+        .stat-card h3 {
+            font-size: 2rem;
+            color: var(--accent-blue);
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Main Grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 500px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 18px rgba(212, 142, 163, 0.06);
+        }
+
+        .section-header {
+            background: var(--bg-secondary);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-header h2 {
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-header h2::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-blue);
+        }
+
+        .section-header.hardware h2::before { background: var(--accent-green); }
+        .section-header.firmware h2::before { background: var(--accent-blue); }
+        .section-header.software h2::before { background: var(--accent-purple); }
+        .section-header.design h2::before { background: var(--accent-orange); }
+        .section-header.blockers h2::before { background: var(--accent-red); }
+
+        .progress-bar {
+            width: 100px;
+            height: 6px;
+            background: var(--bg-primary);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        .section-content {
+            padding: 1rem;
+        }
+
+        /* Checklist Items */
+        .checklist {
+            list-style: none;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            border-radius: 8px;
+            transition: background 0.2s;
+            cursor: pointer;
+        }
+
+        .checklist-item:hover {
+            background: var(--bg-secondary);
+        }
+
+        .checklist-item.completed {
+            opacity: 0.6;
+        }
+
+        .checklist-item.completed .item-text {
+            text-decoration: line-through;
+            color: var(--text-secondary);
+        }
+
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+            transition: all 0.2s;
+        }
+
+        .checklist-item.completed .checkbox {
+            background: var(--accent-green);
+            border-color: var(--accent-green);
+        }
+
+        .checklist-item.completed .checkbox::after {
+            content: '✓';
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .item-content {
+            flex: 1;
+        }
+
+        .item-text {
+            font-size: 0.95rem;
+        }
+
+        .item-meta {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.25rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-size: 0.7rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+
+        .tag.blocker {
+            background: rgba(255, 107, 107, 0.2);
+            color: var(--accent-red);
+            border-color: var(--accent-red);
+        }
+
+        .tag.insight {
+            background: rgba(79, 195, 247, 0.2);
+            color: var(--accent-blue);
+            border-color: var(--accent-blue);
+        }
+
+        /* Log Entries */
+        .log-entry {
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            border-left: 3px solid var(--accent-blue);
+        }
+
+        .log-entry.blocker {
+            border-left-color: var(--accent-red);
+        }
+
+        .log-entry.insight {
+            border-left-color: var(--accent-green);
+        }
+
+        .log-entry.trial {
+            border-left-color: var(--accent-orange);
+        }
+
+        .log-date {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.25rem;
+        }
+
+        .log-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .log-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Add Entry Form */
+        .add-entry {
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .add-entry input,
+        .add-entry textarea,
+        .add-entry select {
+            width: 100%;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.75rem;
+            color: var(--text-primary);
+            font-family: inherit;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .add-entry input:focus,
+        .add-entry textarea:focus,
+        .add-entry select:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+        }
+
+        .add-entry textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 0.65rem 1.15rem;
+            border: none;
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 0.88rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            box-shadow: 0 4px 14px rgba(212, 142, 163, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(212, 142, 163, 0.22);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-secondary);
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+        }
+
+        /* Export Section */
+        .export-section {
+            margin-top: 2rem;
+            text-align: center;
+            padding: 2rem;
+            background: var(--bg-card);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .export-section h3 {
+            margin-bottom: 1rem;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0.5rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 1.5rem;
+            padding-left: 1rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -1.55rem;
+            top: 0.25rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent-blue);
+            border: 3px solid var(--bg-card);
+        }
+
+        .timeline-item.completed::before {
+            background: var(--accent-green);
+        }
+
+        .timeline-item.in-progress::before {
+            background: var(--accent-orange);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255, 171, 64, 0.4); }
+            50% { box-shadow: 0 0 0 8px rgba(255, 171, 64, 0); }
+        }
+
+        .timeline-date {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            margin: 0.25rem 0;
+        }
+
+        .timeline-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Notes */
+        .notes-area {
+            width: 100%;
+            min-height: 120px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            resize: vertical;
+        }
+
+        .notes-area:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+        }
+
+        /* To-Do List */
+        .todo-add {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.25rem;
+        }
+        .todo-add input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
+        }
+        .todo-add input:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(212, 142, 163, 0.18);
+        }
+
+        .todo-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .todo-item {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            padding: 0.75rem 1rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            transition: all 0.15s ease;
+        }
+        .todo-item:hover { border-color: var(--accent-blue); }
+        .todo-item .checkbox {
+            flex: 0 0 auto;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s ease;
+        }
+        .todo-item.done .checkbox {
+            background: var(--accent-green);
+            border-color: var(--accent-green);
+        }
+        .todo-item.done .checkbox::after {
+            content: '✓';
+            color: #fff;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .todo-item .todo-text {
+            flex: 1;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            word-break: break-word;
+        }
+        .todo-item.done .todo-text {
+            color: var(--text-secondary);
+            text-decoration: line-through;
+        }
+        .todo-item .todo-del {
+            flex: 0 0 auto;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 16px;
+            line-height: 1;
+            opacity: 0;
+            transition: all 0.15s ease;
+        }
+        .todo-item:hover .todo-del { opacity: 1; }
+        .todo-item .todo-del:hover {
+            background: var(--accent-red);
+            color: #fff;
+        }
+
+        /* Image Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed var(--border);
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-item:hover {
+            border-color: var(--accent-blue);
+            background: var(--bg-primary);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-item.add {
+            font-size: 2rem;
+            color: var(--text-secondary);
+        }
+
+        .gallery-item .caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.55);
+            color: #fff;
+            padding: 0.5rem;
+            font-size: 0.75rem;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+        .gallery-item:hover .caption { opacity: 1; }
+
+        .gallery-item .delete-btn {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.92);
+            color: var(--accent-red);
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+        }
+        .gallery-item:hover .delete-btn { opacity: 1; }
+        .gallery-item .delete-btn:hover { transform: scale(1.1); background: #fff; }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(40, 25, 30, 0.78);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            cursor: zoom-out;
+            animation: lightbox-fade 0.18s ease;
+        }
+        .lightbox.open { display: flex; }
+        @keyframes lightbox-fade {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .lightbox-inner {
+            position: relative;
+            max-width: 95vw;
+            max-height: 90vh;
+            cursor: default;
+        }
+        .lightbox-inner img {
+            max-width: 95vw;
+            max-height: 85vh;
+            border-radius: 14px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+            display: block;
+        }
+        .lightbox-caption {
+            color: #fff;
+            text-align: center;
+            margin-top: 0.85rem;
+            font-size: 0.9rem;
+            letter-spacing: 0.02em;
+            opacity: 0.85;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: -14px;
+            right: -14px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: none;
+            background: #fff;
+            color: var(--text-primary);
+            font-size: 20px;
+            line-height: 1;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+            transition: transform 0.15s ease;
+        }
+        .lightbox-close:hover { transform: scale(1.08); }
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255,255,255,0.92);
+            color: var(--text-primary);
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+            transition: transform 0.15s ease, background 0.15s ease;
+        }
+        .lightbox-nav:hover { transform: translateY(-50%) scale(1.08); background: #fff; }
+        .lightbox-nav.prev { left: -60px; }
+        .lightbox-nav.next { right: -60px; }
+        @media (max-width: 720px) {
+            .lightbox-nav.prev { left: 8px; }
+            .lightbox-nav.next { right: 8px; }
+            .lightbox-close { top: 8px; right: 8px; }
+        }
+        /* Sticky section nav */
+        .section-nav {
+            position: sticky;
+            top: 1rem;
+            z-index: 50;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(14px) saturate(140%);
+            -webkit-backdrop-filter: blur(14px) saturate(140%);
+            border: 1px solid var(--border);
+            box-shadow: 0 6px 22px rgba(212, 142, 163, 0.12);
+            border-radius: 999px;
+            padding: 0.45rem 0.6rem;
+            margin: 0 auto 1.75rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.2rem;
+            justify-content: center;
+            width: fit-content;
+            max-width: 100%;
+        }
+        .section-nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.4rem 0.95rem;
+            border-radius: 999px;
+            font-size: 0.88rem;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        .section-nav a:hover {
+            color: var(--text-primary);
+            background: var(--bg-secondary);
+        }
+        .section-nav a.active {
+            color: #fff;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            box-shadow: 0 4px 12px rgba(212, 142, 163, 0.35);
+        }
+        html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+        ::selection { background: var(--accent-blue); color: #fff; }
+
+        /* Single-page app: only the active .page is visible */
+        .page { display: none; }
+        .page.active { display: block; animation: page-fade 0.25s ease; }
+        @keyframes page-fade {
+            from { opacity: 0; transform: translateY(6px); }
+            to   { opacity: 1; transform: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Diary Camera</h1>
+            <p>The Intelligent Diary — Engineering Portfolio Tracker</p>
+            <p class="tagline">"Social hardware that turns photography into an intelligent, reflective dialogue"</p>
+        </header>
+
+        <!-- Section nav (jump-links within this single page) -->
+        <nav class="section-nav" id="section-nav">
+            <a href="#dashboard">Dashboard</a>
+            <a href="#todo">To-Do</a>
+            <a href="#hardware">Hardware</a>
+            <a href="#firmware">Firmware</a>
+            <a href="#software">Software</a>
+            <a href="#design">Design</a>
+            <a href="#lab-diary">Lab Diary</a>
+            <a href="#gallery-section">Gallery</a>
+        </nav>
+
+        <!-- Dashboard page -->
+        <div class="page" id="dashboard">
+
+        <!-- Stats Overview -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3 id="overall-progress">0%</h3>
+                <p>Overall Progress</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="days-active">0</h3>
+                <p>Days Active</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="trials-count">0</h3>
+                <p>Trials & Errors</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="insights-count">0</h3>
+                <p>Key Insights</p>
+            </div>
+        </div>
+
+        <!-- Timeline (inside Dashboard) -->
+        <div class="section">
+            <div class="section-header">
+                <h2>Project Timeline</h2>
+            </div>
+            <div class="section-content">
+                <div class="timeline" id="timeline">
+                    <div class="timeline-item completed">
+                        <div class="timeline-date">Phase 0</div>
+                        <div class="timeline-title">Concept & BOM</div>
+                        <div class="timeline-desc">Define scope, select components, cost analysis</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">Phase 1</div>
+                        <div class="timeline-title">Hardware Bring-up</div>
+                        <div class="timeline-desc">Breadboard prototype, validate each subsystem</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">Phase 2</div>
+                        <div class="timeline-title">Firmware Core</div>
+                        <div class="timeline-desc">Camera, audio, LED state machine, Wi-Fi</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">Phase 3</div>
+                        <div class="timeline-title">Backend & AI</div>
+                        <div class="timeline-desc">Flask API, multimodal inference, TTS</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">Phase 4</div>
+                        <div class="timeline-title">Integration</div>
+                        <div class="timeline-desc">End-to-end data flow, enclosure integration</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">Phase 5</div>
+                        <div class="timeline-title">Polish & Gallery</div>
+                        <div class="timeline-desc">Refine UX, deploy gallery, create QR codes</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </div> <!-- /#dashboard -->
+
+            <!-- To-Do page -->
+            <div class="section page" id="todo">
+                <div class="section-header">
+                    <h2>To-Do</h2>
+                    <span id="todo-counter" style="font-size: 0.85rem; color: var(--text-secondary); font-weight: 500;">0 / 0</span>
+                </div>
+                <div class="section-content">
+                    <div class="todo-add">
+                        <input type="text" id="todo-input" placeholder="Add a task and press Enter…" maxlength="200">
+                        <button class="btn btn-primary" onclick="addTodo()" style="flex: 0 0 auto; max-width: 120px;">Add</button>
+                    </div>
+                    <ul class="todo-list" id="todo-list"></ul>
+                    <p id="todo-empty" style="text-align: center; color: var(--text-secondary); font-size: 0.9rem; margin-top: 1rem;">
+                        No tasks yet — add your first one above.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Hardware page -->
+            <div class="section page" id="hardware">
+                <div class="section-header hardware">
+                    <h2>Hardware Engineering</h2>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="hw-progress" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="section-content">
+                    <ul class="checklist" id="hardware-list">
+                        <li class="checklist-item" data-id="hw1">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">ESP32-S3-WROOM-1 integration</div>
+                                <div class="item-meta">
+                                    <span class="tag">MCU</span>
+                                    <span class="tag">Critical</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="checklist-item" data-id="hw2">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">OV2640 camera module mounting</div>
+                                <div class="item-meta">
+                                    <span class="tag">Vision</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="checklist-item" data-id="hw3">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">WS2812 8-LED ring assembly</div>
+                                <div class="item-meta">
+                                    <span class="tag">NVUI</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="checklist-item" data-id="hw4">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">INMP441 I2S microphone integration</div>
+                                <div class="item-meta">
+                                    <span class="tag">Audio In</span>
+                                    <span class="tag insight">Acoustic Design</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="checklist-item" data-id="hw5">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">MAX98357A + speaker output</div>
+                                <div class="item-meta">
+                                    <span class="tag">Audio Out</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="checklist-item" data-id="hw6">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">Kailh Box shutter switch</div>
+                                <div class="item-meta">
+                                    <span class="tag">Input</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="checklist-item" data-id="hw7">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">SPDT power switch</div>
+                                <div class="item-meta">
+                                    <span class="tag">Power</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="checklist-item" data-id="hw8">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">TP4056 USB-C charging circuit</div>
+                                <div class="item-meta">
+                                    <span class="tag">Power</span>
+                                    <span class="tag">LiPo</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="checklist-item" data-id="hw9">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">MicroSD card slot integration</div>
+                                <div class="item-meta">
+                                    <span class="tag">Storage</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="checklist-item" data-id="hw10">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">M2 heat-set inserts & assembly</div>
+                                <div class="item-meta">
+                                    <span class="tag">DfA</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Firmware page -->
+            <div class="section page" id="firmware">
+                <div class="section-header firmware">
+                    <h2>Firmware Development</h2>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="fw-progress" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="section-content">
+                    <ul class="checklist" id="firmware-list">
+                        <li class="checklist-item" data-id="fw1">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">Camera capture (JPEG)</div>
+                                <div class="item-meta">
+                                    <span class="tag">Core</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="checklist-item" data-id="fw2">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">I2S audio recording (WAV)</div>
+                                <div class="item-meta">
+                                    <span class="tag">Audio</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="checklist-item" data-id="fw3">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">I2S audio playback</div>
+                                <div class="item-meta">
+                                    <span class="tag">Audio</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="checklist-item" data-id="fw4">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">WS2812 LED state machine</div>
+                                <div class="item-meta">
+                                    <span class="tag">NVUI</span>
+                                    <span class="tag insight">5 states</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="checklist-item" data-id="fw5">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">Shutter button (short/long press)</div>
+                                <div class="item-meta">
+                                    <span class="tag">Input</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="checklist-item" data-id="fw6">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">Wi-Fi HTTP POST upload</div>
+                                <div class="item-meta">
+                                    <span class="tag">Connectivity</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="checklist-item" data-id="fw7">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">MicroSD FAT32 storage</div>
+                                <div class="item-meta">
+                                    <span class="tag">Storage</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="checklist-item" data-id="fw8">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">PSRAM buffering (JPEG+WAV)</div>
+                                <div class="item-meta">
+                                    <span class="tag">Memory</span>
+                                    <span class="tag">8MB</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="checklist-item" data-id="fw9">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">Power management</div>
+                                <div class="item-meta">
+                                    <span class="tag">Power</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="checklist-item" data-id="fw10">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">OTA update capability</div>
+                                <div class="item-meta">
+                                    <span class="tag">Future</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Software/Backend page -->
+            <div class="section page" id="software">
+                <div class="section-header software">
+                    <h2>Software & Backend</h2>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="sw-progress" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="section-content">
+                    <ul class="checklist" id="software-list">
+                        <li class="checklist-item" data-id="sw1">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">Flask API endpoint</div>
+                                <div class="item-meta">
+                                    <span class="tag">Backend</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="checklist-item" data-id="sw2">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">Multipart upload handler</div>
+                                <div class="item-meta">
+                                    <span class="tag">API</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="checklist-item" data-id="sw3">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">GPT-4o / Gemini Vision integration</div>
+                                <div class="item-meta">
+                                    <span class="tag">AI</span>
+                                    <span class="tag">Multimodal</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="checklist-item" data-id="sw4">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">TTS for AI responses</div>
+                                <div class="item-meta">
+                                    <span class="tag">Audio</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="checklist-item" data-id="sw5">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">Gallery web interface</div>
+                                <div class="item-meta">
+                                    <span class="tag">Frontend</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="checklist-item" data-id="sw6">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">QR code generation</div>
+                                <div class="item-meta">
+                                    <span class="tag">UX</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="checklist-item" data-id="sw7">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">Database schema</div>
+                                <div class="item-meta">
+                                    <span class="tag">Data</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="checklist-item" data-id="sw8">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">Mobile-responsive design</div>
+                                <div class="item-meta">
+                                    <span class="tag">UI/UX</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="checklist-item" data-id="sw9">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">Cloud deployment</div>
+                                <div class="item-meta">
+                                    <span class="tag">DevOps</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Design & CAD page -->
+            <div class="section page" id="design">
+                <div class="section-header design">
+                    <h2>Design & Manufacturing</h2>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="design-progress" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="section-content">
+                    <ul class="checklist" id="design-list">
+                        <li class="checklist-item" data-id="des1">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">Onshape CAD foundation</div>
+                                <div class="item-meta">
+                                    <span class="tag">CAD</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="checklist-item" data-id="des2">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">"Soft pebble" organic lofts</div>
+                                <div class="item-meta">
+                                    <span class="tag">Aesthetic</span>
+                                    <span class="tag insight">Luxury compact</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="checklist-item" data-id="des3">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">Internal Z-axis stack layout</div>
+                                <div class="item-meta">
+                                    <span class="tag">Layout</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="checklist-item" data-id="des4">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">Acoustic port (1.0-1.5mm)</div>
+                                <div class="item-meta">
+                                    <span class="tag">Acoustic</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="checklist-item" data-id="des5">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">Speaker grille pattern</div>
+                                <div class="item-meta">
+                                    <span class="tag">Acoustic</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="checklist-item" data-id="des6">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">Heat-set insert bosses</div>
+                                <div class="item-meta">
+                                    <span class="tag">DfA</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="checklist-item" data-id="des7">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">USB-C port cutout</div>
+                                <div class="item-meta">
+                                    <span class="tag">Feature</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="checklist-item" data-id="des8">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">3D print test (SLA/FDM)</div>
+                                <div class="item-meta">
+                                    <span class="tag">Prototype</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="checklist-item" data-id="des9">
+                            <div class="checkbox"></div>
+                            <div class="item-content">
+                                <div class="item-text">Final surface finish</div>
+                                <div class="item-meta">
+                                    <span class="tag">Finish</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Lab Diary page -->
+            <div class="section page" id="lab-diary">
+                <div class="section-header blockers">
+                    <h2>Trials, Errors & Insights</h2>
+                </div>
+                <div class="section-content">
+                    <div id="log-container">
+                        <div class="log-entry blocker">
+                            <div class="log-date">Template — Date TBD</div>
+                            <div class="log-desc">Wi-Fi and I2S on same bus caused audio glitches. Moved to dedicated I2S pins, added 100nF decoupling cap near mic.</div>
+                        </div>
+                        <div class="log-entry insight">
+                            <div class="log-date">Template — Date TBD</div>
+                            <div class="log-desc">Printed diffuser in translucent PETG at 0.8mm thickness gives best glow without hot spots. Frosted finish post-processing.</div>
+                        </div>
+                    </div>
+                    <div class="add-entry">
+                        <select id="log-type">
+                            <option value="insight">Insight/Learning</option>
+                            <option value="blocker">Blocker/Problem</option>
+                            <option value="trial">Trial & Error</option>
+                        </select>
+                        <textarea id="log-desc" placeholder="What happened? How did you solve it? What did you learn?"></textarea>
+                        <div class="btn-group">
+                            <button class="btn btn-primary" onclick="addLogEntry()">Add Entry</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gallery page -->
+            <div class="section page" id="gallery-section">
+                <div class="section-header">
+                    <h2>Build Photos</h2>
+                </div>
+                <div class="section-content">
+                    <div class="gallery" id="gallery">
+                        <div class="gallery-item add" onclick="document.getElementById('photo-input').click()">
+                            +
+                        </div>
+                    </div>
+                    <input type="file" id="photo-input" accept="image/*" multiple style="display:none" onchange="handlePhotoUpload(event)">
+                    <p style="text-align: center; color: var(--text-secondary); font-size: 0.85rem; margin-top: 1rem;">
+                        Click + to add build photos. Each photo is resized to &le;1200 px and stored as a Blob in IndexedDB.<br>
+                        <strong>Tip:</strong> if the quota seems tiny, serve this page from a local web server instead of opening it via <code>file://</code>.
+                    </p>
+                    <p id="storage-meter" style="text-align: center; color: var(--text-secondary); font-size: 0.75rem; margin-top: 0.25rem; opacity: 0.7;"></p>
+                    <div style="text-align: center; margin-top: 0.75rem;">
+                        <button class="btn btn-secondary" style="max-width: 220px;" onclick="clearAllPhotos()">Clear All Photos</button>
+                    </div>
+                </div>
+            </div>
+
+        <!-- Export Section -->
+        <div class="export-section">
+            <h3>Save Your Progress</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                Your progress is automatically saved to your browser's local storage.<br>
+                Export to a file for backup or to transfer between devices.
+            </p>
+            <div class="btn-group" style="max-width: 400px; margin: 0 auto;">
+                <button class="btn btn-primary" onclick="exportData()">Export Progress (.json)</button>
+                <button class="btn btn-secondary" onclick="document.getElementById('import-file').click()">Import Progress</button>
+            </div>
+            <input type="file" id="import-file" accept=".json" style="display:none" onchange="importData(event)">
+        </div>
+    </div>
+
+    <!-- Lightbox (big photo view) -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+        <div class="lightbox-inner" onclick="event.stopPropagation()">
+            <button class="lightbox-close" aria-label="Close" onclick="closeLightbox()">&times;</button>
+            <button class="lightbox-nav prev" aria-label="Previous" onclick="navLightbox(-1)">&#8249;</button>
+            <img id="lightbox-img" src="" alt="">
+            <button class="lightbox-nav next" aria-label="Next" onclick="navLightbox(1)">&#8250;</button>
+            <div class="lightbox-caption" id="lightbox-caption"></div>
+        </div>
+    </div>
+
+    <script>
+        // ---------- IndexedDB helper (stores photos as Blobs, not base64) ----------
+        // Avoids the ~5 MB localStorage quota — IndexedDB gives 100s of MB to GB.
+        const PhotoDB = (() => {
+            const DB_NAME = 'auraCamPhotos'; // legacy key — kept so existing data still loads
+            const STORE = 'photos';
+            let _db = null;
+
+            function open() {
+                if (_db) return Promise.resolve(_db);
+                return new Promise((resolve, reject) => {
+                    const req = indexedDB.open(DB_NAME, 1);
+                    req.onupgradeneeded = () => {
+                        req.result.createObjectStore(STORE, { keyPath: 'id' });
+                    };
+                    req.onsuccess = () => { _db = req.result; resolve(_db); };
+                    req.onerror = () => reject(req.error);
+                });
+            }
+            function tx(mode) {
+                return open().then(db => db.transaction(STORE, mode).objectStore(STORE));
+            }
+            return {
+                put: (id, blob) => tx('readwrite').then(s => new Promise((res, rej) => {
+                    const r = s.put({ id, blob });
+                    r.onsuccess = () => res();
+                    r.onerror = () => rej(r.error);
+                })),
+                get: (id) => tx('readonly').then(s => new Promise((res, rej) => {
+                    const r = s.get(id);
+                    r.onsuccess = () => res(r.result ? r.result.blob : null);
+                    r.onerror = () => rej(r.error);
+                })),
+                delete: (id) => tx('readwrite').then(s => new Promise((res, rej) => {
+                    const r = s.delete(id);
+                    r.onsuccess = () => res();
+                    r.onerror = () => rej(r.error);
+                })),
+                keys: () => tx('readonly').then(s => new Promise((res, rej) => {
+                    const r = s.getAllKeys();
+                    r.onsuccess = () => res(r.result || []);
+                    r.onerror = () => rej(r.error);
+                })),
+            };
+        })();
+
+        // Track object URLs so we can revoke them (prevents memory leaks)
+        const objectUrlCache = new Map();
+        function cacheUrl(id, url) {
+            const prev = objectUrlCache.get(id);
+            if (prev) URL.revokeObjectURL(prev);
+            objectUrlCache.set(id, url);
+            return url;
+        }
+
+        // Downscale an image File -> Blob (max 1200 px long edge, JPEG q=0.75)
+        // Aggressive compression so we fit comfortably even in small file:// quotas.
+        function downscaleImage(file, maxEdge = 1200, quality = 0.75) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                const reader = new FileReader();
+                reader.onload = e => { img.src = e.target.result; };
+                reader.onerror = () => reject(new Error('File read failed (unsupported format? e.g. HEIC)'));
+                img.onload = () => {
+                    const scale = Math.min(1, maxEdge / Math.max(img.width, img.height));
+                    const w = Math.round(img.width * scale);
+                    const h = Math.round(img.height * scale);
+                    const canvas = document.createElement('canvas');
+                    canvas.width = w; canvas.height = h;
+                    canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+                    canvas.toBlob(blob => blob ? resolve(blob) : reject(new Error('Image encode failed')), 'image/jpeg', quality);
+                };
+                img.onerror = () => reject(new Error('Image decode failed (unsupported format? e.g. HEIC)'));
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // Ask the browser for persistent storage so photos aren't evicted
+        async function requestPersistentStorage() {
+            try {
+                if (navigator.storage && navigator.storage.persist) {
+                    await navigator.storage.persist();
+                }
+            } catch (_) { /* non-fatal */ }
+        }
+
+        // Nuke all photo blobs + metadata (user-invoked reset)
+        async function clearAllPhotos() {
+            if (!confirm('Delete ALL build photos? This cannot be undone.')) return;
+            for (const p of appState.photos) {
+                try { await PhotoDB.delete(p.id); } catch (_) {}
+                const cached = objectUrlCache.get(p.id);
+                if (cached) { URL.revokeObjectURL(cached); objectUrlCache.delete(p.id); }
+            }
+            appState.photos = [];
+            saveState();
+            await renderGallery();
+            updateStorageMeter();
+        }
+
+        // ---------- State management ----------
+        let appState = {
+            completedItems: new Set(),
+            logEntries: [],
+            todos: [], // { id, text, done }
+            photos: [], // now stores only { id, caption } — blobs live in IndexedDB
+            startDate: new Date().toISOString()
+        };
+
+        // Load from localStorage (+ migrate legacy base64 photos into IndexedDB)
+        async function loadState() {
+            const saved = localStorage.getItem('auraCamProgress'); // legacy key — kept so existing data still loads
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                appState.completedItems = new Set(parsed.completedItems);
+                appState.logEntries = parsed.logEntries || [];
+                appState.todos = parsed.todos || [];
+                appState.photos = parsed.photos || [];
+                appState.startDate = parsed.startDate || appState.startDate;
+
+                // Migrate: if any legacy photos still carry an inline base64 src, move to IDB
+                const legacy = appState.photos.filter(p => p.src);
+                if (legacy.length) {
+                    for (const p of legacy) {
+                        try {
+                            const blob = await (await fetch(p.src)).blob();
+                            await PhotoDB.put(p.id, blob);
+                        } catch (_) { /* skip bad entry */ }
+                        delete p.src;
+                    }
+                    saveState();
+                }
+
+                // Restore UI
+                appState.completedItems.forEach(id => {
+                    const item = document.querySelector(`[data-id="${id}"]`);
+                    if (item) item.classList.add('completed');
+                });
+                renderLogEntries();
+                renderTodos();
+                await renderGallery();
+                updateProgress();
+            }
+            updateDaysActive();
+            updateStorageMeter();
+        }
+
+        // Save lightweight state to localStorage (no image bytes)
+        function saveState() {
+            const toSave = {
+                completedItems: Array.from(appState.completedItems),
+                logEntries: appState.logEntries,
+                todos: appState.todos,
+                photos: appState.photos.map(p => ({ id: p.id, caption: p.caption })),
+                startDate: appState.startDate
+            };
+            try {
+                localStorage.setItem('auraCamProgress', JSON.stringify(toSave));
+            } catch (err) {
+                alert('Could not save progress metadata: ' + err.message);
+            }
+        }
+
+        // Show how much browser storage is being used (photos live in IDB quota)
+        async function updateStorageMeter() {
+            const el = document.getElementById('storage-meter');
+            if (!el || !navigator.storage || !navigator.storage.estimate) return;
+            const { usage = 0, quota = 0 } = await navigator.storage.estimate();
+            const mb = b => (b / (1024 * 1024)).toFixed(1);
+            el.textContent = `Storage: ${mb(usage)} MB used of ~${mb(quota)} MB available — ${appState.photos.length} photo(s)`;
+        }
+
+        // Toggle checklist item
+        document.querySelectorAll('.checklist-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const id = item.dataset.id;
+                if (appState.completedItems.has(id)) {
+                    appState.completedItems.delete(id);
+                    item.classList.remove('completed');
+                } else {
+                    appState.completedItems.add(id);
+                    item.classList.add('completed');
+                }
+                saveState();
+                updateProgress();
+            });
+        });
+
+        // Update progress bars
+        function updateProgress() {
+            const sections = [
+                { list: 'hardware-list', bar: 'hw-progress' },
+                { list: 'firmware-list', bar: 'fw-progress' },
+                { list: 'software-list', bar: 'sw-progress' },
+                { list: 'design-list', bar: 'design-progress' }
+            ];
+
+            let totalItems = 0;
+            let totalCompleted = 0;
+
+            sections.forEach(({ list, bar }) => {
+                const items = document.querySelectorAll(`#${list} .checklist-item`).length;
+                const completed = document.querySelectorAll(`#${list} .checklist-item.completed`).length;
+                const percent = items > 0 ? (completed / items * 100) : 0;
+                document.getElementById(bar).style.width = percent + '%';
+                totalItems += items;
+                totalCompleted += completed;
+            });
+
+            const overall = totalItems > 0 ? Math.round(totalCompleted / totalItems * 100) : 0;
+            document.getElementById('overall-progress').textContent = overall + '%';
+        }
+
+        // Update days active
+        function updateDaysActive() {
+            const start = new Date(appState.startDate);
+            const now = new Date();
+            const days = Math.floor((now - start) / (1000 * 60 * 60 * 24)) + 1;
+            document.getElementById('days-active').textContent = days;
+        }
+
+        // ---------- To-Do list ----------
+        function addTodo() {
+            const input = document.getElementById('todo-input');
+            const text = input.value.trim();
+            if (!text) return;
+            appState.todos.push({ id: Date.now() + Math.random(), text, done: false });
+            input.value = '';
+            saveState();
+            renderTodos();
+        }
+
+        function toggleTodo(id) {
+            const t = appState.todos.find(x => x.id === id);
+            if (!t) return;
+            t.done = !t.done;
+            saveState();
+            renderTodos();
+        }
+
+        function deleteTodo(id) {
+            appState.todos = appState.todos.filter(x => x.id !== id);
+            saveState();
+            renderTodos();
+        }
+
+        function renderTodos() {
+            const list = document.getElementById('todo-list');
+            const empty = document.getElementById('todo-empty');
+            const counter = document.getElementById('todo-counter');
+            if (!list) return;
+            list.innerHTML = '';
+            appState.todos.forEach(t => {
+                const li = document.createElement('li');
+                li.className = 'todo-item' + (t.done ? ' done' : '');
+                li.innerHTML = `
+                    <div class="checkbox" role="checkbox" aria-checked="${t.done}" tabindex="0"></div>
+                    <div class="todo-text">${escapeHtml(t.text)}</div>
+                    <button class="todo-del" aria-label="Delete task" title="Delete">&times;</button>
+                `;
+                li.querySelector('.checkbox').onclick = () => toggleTodo(t.id);
+                li.querySelector('.todo-del').onclick = () => deleteTodo(t.id);
+                list.appendChild(li);
+            });
+            const done = appState.todos.filter(t => t.done).length;
+            const total = appState.todos.length;
+            if (counter) counter.textContent = `${done} / ${total}`;
+            if (empty) empty.style.display = total === 0 ? '' : 'none';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const input = document.getElementById('todo-input');
+            if (input) {
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') { e.preventDefault(); addTodo(); }
+                });
+            }
+        });
+
+        // Add log entry
+        function addLogEntry() {
+            const type = document.getElementById('log-type').value;
+            const desc = document.getElementById('log-desc').value.trim();
+
+            if (!desc) return;
+
+            const entry = {
+                id: Date.now(),
+                date: new Date().toLocaleDateString(),
+                type,
+                desc
+            };
+
+            appState.logEntries.unshift(entry);
+            saveState();
+            renderLogEntries();
+            updateStats();
+
+            document.getElementById('log-desc').value = '';
+        }
+
+        // Render log entries
+        function renderLogEntries() {
+            const container = document.getElementById('log-container');
+            container.innerHTML = appState.logEntries.map(entry => `
+                <div class="log-entry ${entry.type}">
+                    <div class="log-date">${entry.date}</div>
+                    <div class="log-desc">${escapeHtml(entry.desc)}</div>
+                </div>
+            `).join('');
+        }
+
+        // Update stats
+        function updateStats() {
+            const trials = appState.logEntries.filter(e => e.type === 'trial' || e.type === 'blocker').length;
+            const insights = appState.logEntries.filter(e => e.type === 'insight').length;
+            document.getElementById('trials-count').textContent = trials;
+            document.getElementById('insights-count').textContent = insights;
+        }
+
+        // Handle notes
+
+        // Handle photo upload — downscale client-side, store blob in IndexedDB
+        async function handlePhotoUpload(event) {
+            await requestPersistentStorage();
+            const files = Array.from(event.target.files);
+            let quotaHit = false;
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                try {
+                    const blob = await downscaleImage(file);
+                    const id = Date.now() + Math.random();
+                    try {
+                        await PhotoDB.put(id, blob);
+                    } catch (err) {
+                        const name = err && err.name ? err.name : '';
+                        if (name === 'QuotaExceededError' || /quota/i.test(err && err.message || '')) {
+                            quotaHit = true;
+                            const onFile = `file://`.startsWith(location.protocol);
+                            alert(
+                                `Storage quota hit after ${appState.photos.length} photo(s).\n\n` +
+                                (onFile
+                                    ? 'You are opening this page directly from disk (file://). Browsers give file:// pages a very small IndexedDB quota.\n\nFix: serve it over a local web server, e.g. in Terminal:\n    cd "' + 'CAM' + '" && python3 -m http.server 8000\nthen open http://localhost:8000/progress-tracker.html'
+                                    : 'Try "Clear All Photos" or free some browser storage.')
+                            );
+                            break;
+                        }
+                        throw err;
+                    }
+                    appState.photos.push({ id, caption: file.name });
+                } catch (err) {
+                    console.error('Photo upload failed for', file.name, err);
+                    alert(`Could not add ${file.name}: ${err.message || err}`);
+                }
+            }
+            saveState();
+            await renderGallery();
+            updateStorageMeter();
+            event.target.value = '';
+            if (quotaHit) { /* stop silently after alert */ }
+        }
+
+        // Render gallery — pulls blobs from IndexedDB, converts to object URLs
+        async function renderGallery() {
+            const gallery = document.getElementById('gallery');
+            const addBtn = gallery.querySelector('.add');
+
+            gallery.querySelectorAll('.gallery-item:not(.add)').forEach(el => el.remove());
+
+            for (let i = 0; i < appState.photos.length; i++) {
+                const photo = appState.photos[i];
+                const blob = await PhotoDB.get(photo.id);
+                if (!blob) continue;
+                const url = cacheUrl(photo.id, URL.createObjectURL(blob));
+
+                const div = document.createElement('div');
+                div.className = 'gallery-item';
+                div.innerHTML = `
+                    <img src="${url}" alt="${escapeHtml(photo.caption)}" loading="lazy">
+                    <button class="delete-btn" aria-label="Delete photo" title="Delete">&times;</button>
+                    <div class="caption">${escapeHtml(photo.caption)}</div>
+                `;
+                const index = i;
+                div.querySelector('img').onclick = () => openLightbox(index);
+                div.querySelector('.delete-btn').onclick = async (e) => {
+                    e.stopPropagation();
+                    if (!confirm('Remove this photo?')) return;
+                    await PhotoDB.delete(photo.id);
+                    const cached = objectUrlCache.get(photo.id);
+                    if (cached) { URL.revokeObjectURL(cached); objectUrlCache.delete(photo.id); }
+                    appState.photos = appState.photos.filter(p => p.id !== photo.id);
+                    saveState();
+                    await renderGallery();
+                    updateStorageMeter();
+                };
+                gallery.insertBefore(div, addBtn);
+            }
+        }
+
+        // ---------- Lightbox ----------
+        let lightboxIndex = -1;
+
+        async function openLightbox(index) {
+            if (index < 0 || index >= appState.photos.length) return;
+            lightboxIndex = index;
+            const photo = appState.photos[index];
+            const blob = await PhotoDB.get(photo.id);
+            if (!blob) return;
+            const url = objectUrlCache.get(photo.id) || cacheUrl(photo.id, URL.createObjectURL(blob));
+            const box = document.getElementById('lightbox');
+            document.getElementById('lightbox-img').src = url;
+            document.getElementById('lightbox-img').alt = photo.caption || '';
+            document.getElementById('lightbox-caption').textContent =
+                `${photo.caption || ''}   ·   ${index + 1} / ${appState.photos.length}`;
+            box.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('open');
+            document.body.style.overflow = '';
+            lightboxIndex = -1;
+        }
+
+        function navLightbox(delta) {
+            if (lightboxIndex < 0) return;
+            const n = appState.photos.length;
+            if (n === 0) return closeLightbox();
+            openLightbox((lightboxIndex + delta + n) % n);
+        }
+
+        // Backdrop click closes, keyboard navigates
+        document.addEventListener('DOMContentLoaded', () => {
+            const box = document.getElementById('lightbox');
+            if (box) box.addEventListener('click', closeLightbox);
+        });
+        document.addEventListener('keydown', (e) => {
+            if (!document.getElementById('lightbox').classList.contains('open')) return;
+            if (e.key === 'Escape') closeLightbox();
+            else if (e.key === 'ArrowRight') navLightbox(1);
+            else if (e.key === 'ArrowLeft') navLightbox(-1);
+        });
+
+        function blobToBase64(blob) {
+            return new Promise((resolve, reject) => {
+                const r = new FileReader();
+                r.onload = () => resolve(r.result);
+                r.onerror = reject;
+                r.readAsDataURL(blob);
+            });
+        }
+
+        // Export data — bundles photo blobs back into the JSON as base64 for portability
+        async function exportData() {
+            const photosWithData = [];
+            for (const p of appState.photos) {
+                const blob = await PhotoDB.get(p.id);
+                if (!blob) continue;
+                photosWithData.push({ id: p.id, caption: p.caption, src: await blobToBase64(blob) });
+            }
+            const data = {
+                completedItems: Array.from(appState.completedItems),
+                logEntries: appState.logEntries,
+                todos: appState.todos,
+                photos: photosWithData,
+                startDate: appState.startDate,
+                exportDate: new Date().toISOString(),
+                version: '2.0'
+            };
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `diary-camera-progress-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Import data — unpacks base64 photos from JSON back into IndexedDB
+        function importData(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = async (e) => {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    appState.completedItems = new Set(data.completedItems || []);
+                    appState.logEntries = data.logEntries || [];
+                    appState.todos = data.todos || [];
+                    appState.startDate = data.startDate || appState.startDate;
+
+                    const importedPhotos = data.photos || [];
+                    appState.photos = [];
+                    for (const p of importedPhotos) {
+                        if (p.src) {
+                            try {
+                                const blob = await (await fetch(p.src)).blob();
+                                await PhotoDB.put(p.id, blob);
+                            } catch (_) { continue; }
+                        }
+                        appState.photos.push({ id: p.id, caption: p.caption });
+                    }
+
+                    document.querySelectorAll('.checklist-item').forEach(item => {
+                        item.classList.toggle('completed', appState.completedItems.has(item.dataset.id));
+                    });
+                    renderLogEntries();
+                    renderTodos();
+                    await renderGallery();
+                    updateProgress();
+                    updateStats();
+                    updateDaysActive();
+                    updateStorageMeter();
+                    saveState();
+
+                    alert('Progress imported successfully!');
+                } catch (err) {
+                    alert('Error importing file: ' + err.message);
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        // Utility: escape HTML
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // ---------- Tabbed page switching ----------
+        function showPage(id) {
+            const target = document.getElementById(id);
+            if (!target || !target.classList.contains('page')) return;
+            document.querySelectorAll('.page').forEach(p => p.classList.toggle('active', p === target));
+            document.querySelectorAll('.section-nav a').forEach(a =>
+                a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        (() => {
+            const nav = document.getElementById('section-nav');
+            if (!nav) return;
+            nav.querySelectorAll('a').forEach(a => {
+                a.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const id = a.getAttribute('href').slice(1);
+                    if (location.hash !== '#' + id) {
+                        history.pushState(null, '', '#' + id);
+                    }
+                    showPage(id);
+                });
+            });
+            window.addEventListener('hashchange', () => {
+                const id = location.hash.slice(1) || 'dashboard';
+                if (document.getElementById(id)) showPage(id);
+            });
+            const initial = (location.hash && document.getElementById(location.hash.slice(1)))
+                ? location.hash.slice(1)
+                : 'dashboard';
+            showPage(initial);
+        })();
+
+        // ---------- First-visit auto-seed (Pennlaine's real tracked data) ----------
+        // Browser storage is per-origin, so the embedded demo starts empty.
+        // On the very first load we replay the bundled export into IndexedDB +
+        // localStorage (same steps as Import), so visitors see the real data.
+        async function seedIfEmpty() {
+            try {
+                if (localStorage.getItem('auraCamProgress')) return;
+                const res = await fetch('progress-seed.json', { cache: 'no-store' });
+                if (!res.ok) return;
+                const data = await res.json();
+                appState.completedItems = new Set(data.completedItems || []);
+                appState.logEntries = data.logEntries || [];
+                appState.todos = data.todos || [];
+                appState.startDate = data.startDate || appState.startDate;
+                const importedPhotos = data.photos || [];
+                appState.photos = [];
+                for (const p of importedPhotos) {
+                    if (p.src) {
+                        try {
+                            const blob = await (await fetch(p.src)).blob();
+                            await PhotoDB.put(p.id, blob);
+                        } catch (_) { continue; }
+                    }
+                    appState.photos.push({ id: p.id, caption: p.caption });
+                }
+                document.querySelectorAll('.checklist-item').forEach(item =>
+                    item.classList.toggle('completed', appState.completedItems.has(item.dataset.id)));
+                renderLogEntries();
+                renderTodos();
+                await renderGallery();
+                updateProgress();
+                updateDaysActive();
+                updateStorageMeter();
+                saveState();
+            } catch (_) { /* non-fatal — demo just stays empty */ }
+        }
+
+        // Initialize
+        (async () => {
+            await loadState();
+            await seedIfEmpty();
+            updateStats();
+        })();
+    </script>
+</body>
+</html>

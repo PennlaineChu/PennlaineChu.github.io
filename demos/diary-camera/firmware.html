@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firmware — Diary Camera Progress</title>
+    <link rel="stylesheet" href="shared.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <div class="nav-brand">Diary Camera</div>
+            <div class="nav-links">
+                <a class="nav-link" href="index.html">Dashboard</a>
+                <a class="nav-link" href="hardware.html">Hardware</a>
+                <a class="nav-link active" href="firmware.html">Firmware</a>
+                <a class="nav-link" href="software.html">Software</a>
+                <a class="nav-link" href="design.html">Design</a>
+                <a class="nav-link" href="lab-notes.html">Lab Notes</a>
+                <a class="nav-link" href="gallery.html">Gallery</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Firmware Development</h1>
+            <p>ESP32 C++ Arduino code — camera, audio, LEDs, Wi-Fi</p>
+        </div>
+
+        <div class="card">
+            <div class="card-header firmware">
+                <h2>Core Features</h2>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+                </div>
+                <span class="progress-text" id="progress-text">0%</span>
+            </div>
+            <div class="card-content">
+                <ul class="checklist">
+                    <li class="checklist-item" data-id="fw1">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">Camera capture (JPEG)</div>
+                            <div class="item-meta">
+                                <span class="tag">Core</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item" data-id="fw2">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">I2S audio recording (WAV)</div>
+                            <div class="item-meta">
+                                <span class="tag">Audio</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item" data-id="fw3">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">I2S audio playback</div>
+                            <div class="item-meta">
+                                <span class="tag">Audio</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item" data-id="fw4">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">WS2812 LED state machine</div>
+                            <div class="item-meta">
+                                <span class="tag">NVUI</span>
+                                <span class="tag insight">5 states</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item" data-id="fw5">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">Shutter button (short/long press)</div>
+                            <div class="item-meta">
+                                <span class="tag">Input</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item" data-id="fw6">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">Wi-Fi HTTP POST upload</div>
+                            <div class="item-meta">
+                                <span class="tag">Connectivity</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item" data-id="fw7">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">MicroSD FAT32 storage</div>
+                            <div class="item-meta">
+                                <span class="tag">Storage</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item" data-id="fw8">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">PSRAM buffering (JPEG+WAV)</div>
+                            <div class="item-meta">
+                                <span class="tag">Memory</span>
+                                <span class="tag">8MB</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item" data-id="fw9">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">Power management</div>
+                            <div class="item-meta">
+                                <span class="tag">Power</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="checklist-item" data-id="fw10">
+                        <div class="checkbox"></div>
+                        <div class="item-content">
+                            <div class="item-text">OTA update capability</div>
+                            <div class="item-meta">
+                                <span class="tag">Future</span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>LED State Machine Reference</h2>
+            </div>
+            <div class="card-content">
+                <table style="width: 100%; border-collapse: collapse; color: var(--text-secondary);">
+                    <thead>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <th style="text-align: left; padding: 0.75rem;">Phase</th>
+                            <th style="text-align: left; padding: 0.75rem;">Trigger</th>
+                            <th style="text-align: left; padding: 0.75rem;">LED Behavior</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 0.75rem; color: var(--text-primary);">Standby/Boot</td>
+                            <td style="padding: 0.75rem;">Power on</td>
+                            <td style="padding: 0.75rem; color: var(--accent-green);">Pulse blue → Solid green</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.75rem; color: var(--text-primary);">Ready to Shoot</td>
+                            <td style="padding: 0.75rem;">Short press shutter</td>
+                            <td style="padding: 0.75rem; color: var(--text-primary);">Solid white (lens active)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.75rem; color: var(--text-primary);">Capture</td>
+                            <td style="padding: 0.75rem;">Short press again</td>
+                            <td style="padding: 0.75rem; color: var(--text-primary);">Flash white (photo taken)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.75rem; color: var(--text-primary);">Diary Recording</td>
+                            <td style="padding: 0.75rem;">Long-press <3s after snap</td>
+                            <td style="padding: 0.75rem; color: var(--accent-purple);">Rainbow pulse (recording)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.75rem; color: var(--text-primary);">Processing</td>
+                            <td style="padding: 0.75rem;">Release button</td>
+                            <td style="padding: 0.75rem; color: var(--accent-red);">Spinning red (uplink/AI)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.75rem; color: var(--text-primary);">Success</td>
+                            <td style="padding: 0.75rem;">AI response ready</td>
+                            <td style="padding: 0.75rem; color: var(--accent-green);">Solid green (return to standby)</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="margin-top: 1rem; color: var(--text-secondary); font-size: 0.9rem;">
+                    <strong>Default path:</strong> If no long-press within 3s of snap → silent photo, return to standby.
+                </p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>Tech Stack</h2>
+            </div>
+            <div class="card-content">
+                <ul style="color: var(--text-secondary); line-height: 2;">
+                    <li><strong style="color: var(--text-primary);">Framework:</strong> Arduino ESP32-S3 core</li>
+                    <li><strong style="color: var(--text-primary);">LED Control:</strong> FastLED or Adafruit NeoPixel (WS2812 via RMT)</li>
+                    <li><strong style="color: var(--text-primary);">Audio:</strong> I2S for both mic and speaker (reduces Wi-Fi EMI)</li>
+                    <li><strong style="color: var(--text-primary);">Connectivity:</strong> Wi-Fi HTTP POST to Flask backend</li>
+                    <li><strong style="color: var(--text-primary);">Storage:</strong> SD card for photos, PSRAM for staging</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="shared.js"></script>
+    <script>
+        loadState();
+        initChecklist();
+
+        // Update progress bar
+        const fwItems = ['fw1','fw2','fw3','fw4','fw5','fw6','fw7','fw8','fw9','fw10'];
+        const completed = fwItems.filter(id => isCompleted(id)).length;
+        const pct = Math.round(completed / fwItems.length * 100);
+        document.getElementById('progress-fill').style.width = pct + '%';
+        document.getElementById('progress-text').textContent = pct + '%';
+    </script>
+</body>
+</html>

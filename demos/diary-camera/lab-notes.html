@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Diary — Diary Camera Progress</title>
+    <link rel="stylesheet" href="shared.css">
+    <style>
+        .type-select {
+            width: auto;
+            display: inline-block;
+            min-width: 150px;
+        }
+        .diary-entry {
+            white-space: pre-wrap;
+            line-height: 1.6;
+        }
+        .datetime {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+        .date {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+        .time {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+        .mood-icon {
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <div class="nav-brand">Diary Camera</div>
+            <div class="nav-links">
+                <a class="nav-link" href="index.html">Dashboard</a>
+                <a class="nav-link" href="hardware.html">Hardware</a>
+                <a class="nav-link" href="firmware.html">Firmware</a>
+                <a class="nav-link" href="software.html">Software</a>
+                <a class="nav-link" href="design.html">Design</a>
+                <a class="nav-link active" href="lab-notes.html">Lab Diary</a>
+                <a class="nav-link" href="gallery.html">Gallery</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Lab Diary</h1>
+            <p>Day-by-day progress, thoughts, and discoveries</p>
+        </div>
+
+        <div class="card">
+            <div class="card-header blockers">
+                <h2>New Entry</h2>
+            </div>
+            <div class="card-content">
+                <div style="margin-bottom: 0.75rem;">
+                    <select id="entry-type" class="select type-select">
+                        <option value="insight">💡 Insight / Learning</option>
+                        <option value="blocker">🚧 Blocker / Problem</option>
+                        <option value="trial">🔬 Trial &amp; Error</option>
+                        <option value="progress">✅ Progress Update</option>
+                        <option value="idea">💭 Idea / Thought</option>
+                    </select>
+                </div>
+                <textarea id="entry-content" class="textarea" placeholder="What did you work on today? What did you learn? Any breakthroughs or setbacks?" style="min-height: 150px;"></textarea>
+                <div style="display: flex; gap: 0.5rem; margin-top: 0.75rem;">
+                    <button class="btn btn-primary" onclick="addNewEntry()">Add Entry</button>
+                    <button class="btn btn-secondary" onclick="clearForm()">Clear</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>Entries</h2>
+            </div>
+            <div class="card-content" id="entries-container">
+                <!-- Entries rendered here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="shared.js"></script>
+    <script>
+        const moodIcons = {
+            insight: '💡',
+            blocker: '🚧',
+            trial: '🔬',
+            progress: '✅',
+            idea: '💭'
+        };
+
+        loadState();
+        renderEntries();
+
+        function renderEntries() {
+            const container = document.getElementById('entries-container');
+            if (appState.logEntries.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 2rem; color: var(--text-secondary);">
+                        No entries yet. Start documenting your journey!
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = appState.logEntries.map(entry => `
+                <div class="log-entry ${entry.type}">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div style="flex: 1;">
+                            <div class="datetime">
+                                <span class="mood-icon">${moodIcons[entry.type] || '📝'}</span>
+                                <span class="date">${entry.date}</span>
+                                <span class="time">${entry.time || ''}</span>
+                            </div>
+                            <div class="diary-entry">${escapeHtml(entry.content)}</div>
+                        </div>
+                        <button class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.3rem 0.6rem; margin-left: 1rem;" onclick="deleteEntry(${entry.id})">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function addNewEntry() {
+            const type = document.getElementById('entry-type').value;
+            const content = document.getElementById('entry-content').value.trim();
+
+            if (!content) {
+                alert('Please write something!');
+                return;
+            }
+
+            addLogEntry(type, content);
+            renderEntries();
+            clearForm();
+        }
+
+        function deleteEntry(id) {
+            if (confirm('Delete this entry?')) {
+                deleteLogEntry(id);
+                renderEntries();
+            }
+        }
+
+        function clearForm() {
+            document.getElementById('entry-content').value = '';
+            document.getElementById('entry-type').value = 'insight';
+        }
+    </script>
+</body>
+</html>

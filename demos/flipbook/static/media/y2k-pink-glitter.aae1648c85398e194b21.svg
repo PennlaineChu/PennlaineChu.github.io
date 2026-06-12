@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="540" height="960" viewBox="0 0 540 960" preserveAspectRatio="xMidYMid slice">
+  <!--
+    Y2K pink glitter — matches Pinterest reference templates 7720cdd,
+    11, 12. Hot-pink-to-fuchsia radial with a dense glitter speckle
+    of white/blush dots in varying sizes for the classic 2003 MySpace
+    glitter-background feel.
+  -->
+  <defs>
+    <radialGradient id="pg-bg" cx="50%" cy="40%" r="90%">
+      <stop offset="0%"  stop-color="#ffc6dc"/>
+      <stop offset="45%" stop-color="#ff6fae"/>
+      <stop offset="100%" stop-color="#a62763"/>
+    </radialGradient>
+    <!-- micro-glitter tile: many tiny bright dots -->
+    <pattern id="pg-glitter" x="0" y="0" width="7" height="7" patternUnits="userSpaceOnUse">
+      <circle cx="1.2" cy="1.6" r="0.55" fill="#ffffff" opacity="0.95"/>
+      <circle cx="3.5" cy="4.5" r="0.35" fill="#ffe3ee" opacity="0.85"/>
+      <circle cx="5.8" cy="1.1" r="0.4"  fill="#ffffff" opacity="0.75"/>
+      <circle cx="2.6" cy="6.3" r="0.25" fill="#ffd6e6" opacity="0.8"/>
+    </pattern>
+    <!-- SVG film grain for texture -->
+    <filter id="pg-grain">
+      <feTurbulence type="fractalNoise" baseFrequency="1.2" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.12 0"/>
+    </filter>
+  </defs>
+  <rect width="540" height="960" fill="url(#pg-bg)"/>
+  <rect width="540" height="960" fill="url(#pg-glitter)" opacity="0.9"/>
+  <!-- larger sparkle stars sprinkled in -->
+  <g fill="#ffffff" opacity="0.85">
+    <path d="M80  120 L84  108 L88  120 L100 124 L88 128 L84 140 L80 128 L68 124 Z"/>
+    <path d="M420 260 L424 248 L428 260 L440 264 L428 268 L424 280 L420 268 L408 264 Z"/>
+    <path d="M160 520 L164 508 L168 520 L180 524 L168 528 L164 540 L160 528 L148 524 Z"/>
+    <path d="M460 720 L464 708 L468 720 L480 724 L468 728 L464 740 L460 728 L448 724 Z"/>
+    <path d="M60  820 L64  808 L68  820 L80  824 L68 828 L64 840 L60 828 L48 824 Z"/>
+    <path d="M280 380 L284 368 L288 380 L300 384 L288 388 L284 400 L280 388 L268 384 Z"/>
+  </g>
+  <rect width="540" height="960" filter="url(#pg-grain)"/>
+</svg>

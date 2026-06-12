@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+  <defs>
+    <linearGradient id="sqlBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c297b8"/>
+      <stop offset="1" stop-color="#90a8c3"/>
+    </linearGradient>
+  </defs>
+  <g>
+    <path d="M22 30v68c0 9.94 18.8 18 42 18s42-8.06 42-18V30z" fill="url(#sqlBody)"/>
+    <ellipse cx="64" cy="30" rx="42" ry="18" fill="#e7c8dd"/>
+    <ellipse cx="64" cy="30" rx="42" ry="18" fill="none" stroke="#ffffff" stroke-opacity="0.7" stroke-width="2"/>
+    <path d="M22 53c0 9.94 18.8 18 42 18s42-8.06 42-18" fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="2"/>
+    <path d="M22 76c0 9.94 18.8 18 42 18s42-8.06 42-18" fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="2"/>
+    <text x="64" y="104" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#ffffff">SQL</text>
+  </g>
+</svg>

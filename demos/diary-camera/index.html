@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard — Diary Camera Progress</title>
+    <link rel="stylesheet" href="shared.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <div class="nav-brand">Diary Camera</div>
+            <div class="nav-links">
+                <a class="nav-link active" href="index.html">Dashboard</a>
+                <a class="nav-link" href="hardware.html">Hardware</a>
+                <a class="nav-link" href="firmware.html">Firmware</a>
+                <a class="nav-link" href="software.html">Software</a>
+                <a class="nav-link" href="design.html">Design</a>
+                <a class="nav-link" href="lab-notes.html">Lab Diary</a>
+                <a class="nav-link" href="gallery.html">Gallery</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Dashboard</h1>
+            <p>Track your progress on the Intelligent Diary hardware project</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3 id="stat-overall">0%</h3>
+                <p>Overall Progress</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="stat-days">0</h3>
+                <p>Days Active</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="stat-trials">0</h3>
+                <p>Trials &amp; Errors</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="stat-insights">0</h3>
+                <p>Key Insights</p>
+            </div>
+        </div>
+
+        <h2 style="margin-bottom: 1rem; font-size: 1.25rem;">Sections</h2>
+        <div class="dashboard-grid">
+            <a class="quick-link" href="hardware.html">
+                <div class="card">
+                    <div class="card-header hardware">
+                        <h2>Hardware</h2>
+                    </div>
+                    <div class="card-content">
+                        <p class="section-summary">ESP32, camera, audio, power, mechanical assembly</p>
+                        <div class="mini-progress">
+                            <div class="mini-progress-bar">
+                                <div class="mini-progress-fill" id="dash-hw" style="width: 0%"></div>
+                            </div>
+                            <span class="mini-progress-text" id="dash-hw-text">0%</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <a class="quick-link" href="firmware.html">
+                <div class="card">
+                    <div class="card-header firmware">
+                        <h2>Firmware</h2>
+                    </div>
+                    <div class="card-content">
+                        <p class="section-summary">C++ Arduino code, I2S, Wi-Fi, LED state machine</p>
+                        <div class="mini-progress">
+                            <div class="mini-progress-bar">
+                                <div class="mini-progress-fill" id="dash-fw" style="width: 0%"></div>
+                            </div>
+                            <span class="mini-progress-text" id="dash-fw-text">0%</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <a class="quick-link" href="software.html">
+                <div class="card">
+                    <div class="card-header software">
+                        <h2>Software</h2>
+                    </div>
+                    <div class="card-content">
+                        <p class="section-summary">Flask API, AI integration, gallery, deployment</p>
+                        <div class="mini-progress">
+                            <div class="mini-progress-bar">
+                                <div class="mini-progress-fill" id="dash-sw" style="width: 0%"></div>
+                            </div>
+                            <span class="mini-progress-text" id="dash-sw-text">0%</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <a class="quick-link" href="design.html">
+                <div class="card">
+                    <div class="card-header design">
+                        <h2>Design</h2>
+                    </div>
+                    <div class="card-content">
+                        <p class="section-summary">Onshape CAD, lofts, acoustic ports, 3D printing</p>
+                        <div class="mini-progress">
+                            <div class="mini-progress-bar">
+                                <div class="mini-progress-fill" id="dash-des" style="width: 0%"></div>
+                            </div>
+                            <span class="mini-progress-text" id="dash-des-text">0%</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <a class="quick-link" href="lab-notes.html">
+                <div class="card">
+                    <div class="card-header blockers">
+                        <h2>Lab Diary</h2>
+                    </div>
+                    <div class="card-content">
+                        <p class="section-summary">Day-by-day progress, thoughts, and discoveries</p>
+                        <p style="margin-top: 0.5rem; color: var(--accent-blue); font-weight: 500;">
+                            <span id="dash-logs">0</span> entries
+                        </p>
+                    </div>
+                </div>
+            </a>
+
+            <a class="quick-link" href="gallery.html">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Gallery</h2>
+                    </div>
+                    <div class="card-content">
+                        <p class="section-summary">Build photos, prototypes, test prints</p>
+                        <p style="margin-top: 0.5rem; color: var(--accent-purple); font-weight: 500;">
+                            <span id="dash-photos">0</span> photos
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <h2 style="margin: 2rem 0 1rem; font-size: 1.25rem;">Project Timeline</h2>
+        <div class="card">
+            <div class="card-content">
+                <div class="timeline">
+                    <div class="timeline-item completed">
+                        <div class="timeline-date">Phase 0 — Planning</div>
+                        <div class="timeline-title">Concept &amp; BOM</div>
+                        <div class="timeline-desc">Define scope, select components, cost analysis</div>
+                    </div>
+                    <div class="timeline-item" id="phase1">
+                        <div class="timeline-date">Phase 1 — Prototyping</div>
+                        <div class="timeline-title">Hardware Bring-up</div>
+                        <div class="timeline-desc">Breadboard prototype, validate each subsystem</div>
+                    </div>
+                    <div class="timeline-item" id="phase2">
+                        <div class="timeline-date">Phase 2 — Embedded</div>
+                        <div class="timeline-title">Firmware Core</div>
+                        <div class="timeline-desc">Camera, audio, LED state machine, Wi-Fi</div>
+                    </div>
+                    <div class="timeline-item" id="phase3">
+                        <div class="timeline-date">Phase 3 — Backend</div>
+                        <div class="timeline-title">AI &amp; Services</div>
+                        <div class="timeline-desc">Flask API, multimodal inference, TTS</div>
+                    </div>
+                    <div class="timeline-item" id="phase4">
+                        <div class="timeline-date">Phase 4 — Integration</div>
+                        <div class="timeline-title">System Integration</div>
+                        <div class="timeline-desc">End-to-end data flow, enclosure integration</div>
+                    </div>
+                    <div class="timeline-item" id="phase5">
+                        <div class="timeline-date">Phase 5 — Polish</div>
+                        <div class="timeline-title">Gallery &amp; QR</div>
+                        <div class="timeline-desc">Refine UX, deploy gallery, create QR codes</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 style="margin: 2rem 0 1rem; font-size: 1.25rem;">Data Management</h2>
+        <div class="export-bar">
+            <p>All progress auto-saves to browser. Export for backup or import on another device.</p>
+            <div style="display: flex; gap: 0.5rem;">
+                <button class="btn btn-primary" onclick="exportData()">Export JSON</button>
+                <button class="btn btn-secondary" onclick="document.getElementById('import-file').click()">Import</button>
+            </div>
+            <input type="file" id="import-file" accept=".json" style="display:none" onchange="handleImport(event)">
+        </div>
+    </div>
+
+    <script src="shared.js"></script>
+    <script>
+        loadState();
+
+        // Update stats
+        const stats = getStats();
+        document.getElementById('stat-overall').textContent = stats.overall + '%';
+        document.getElementById('stat-days').textContent = stats.days;
+        document.getElementById('stat-trials').textContent = stats.trials;
+        document.getElementById('stat-insights').textContent = stats.insights;
+        document.getElementById('dash-logs').textContent = stats.totalLogs;
+        document.getElementById('dash-photos').textContent = stats.totalPhotos;
+
+        // Count by section
+        const hwItems = ['hw1','hw2','hw3','hw4','hw5','hw6','hw7','hw8','hw9','hw10'];
+        const fwItems = ['fw1','fw2','fw3','fw4','fw5','fw6','fw7','fw8','fw9','fw10'];
+        const swItems = ['sw1','sw2','sw3','sw4','sw5','sw6','sw7','sw8','sw9'];
+        const desItems = ['des1','des2','des3','des4','des5','des6','des7','des8','des9'];
+
+        function updateSectionStat(items, fillId, textId) {
+            const done = items.filter(id => appState.completedItems.has(id)).length;
+            const pct = Math.round(done / items.length * 100);
+            document.getElementById(fillId).style.width = pct + '%';
+            document.getElementById(textId).textContent = pct + '%';
+            return pct;
+        }
+
+        updateSectionStat(hwItems, 'dash-hw', 'dash-hw-text');
+        updateSectionStat(fwItems, 'dash-fw', 'dash-fw-text');
+        updateSectionStat(swItems, 'dash-sw', 'dash-sw-text');
+        updateSectionStat(desItems, 'dash-des', 'dash-des-text');
+
+        // Auto-detect phase progress
+        const hwPct = updateSectionStat(hwItems, 'dash-hw', 'dash-hw-text');
+        const fwPct = updateSectionStat(fwItems, 'dash-fw', 'dash-fw-text');
+        const swPct = updateSectionStat(swItems, 'dash-sw', 'dash-sw-text');
+
+        document.getElementById('phase1').classList.toggle('completed', hwPct > 30);
+        document.getElementById('phase1').classList.toggle('in-progress', hwPct > 0 && hwPct < 100);
+        document.getElementById('phase2').classList.toggle('in-progress', fwPct > 0 && fwPct < 100);
+        document.getElementById('phase3').classList.toggle('in-progress', swPct > 0 && swPct < 100);
+
+        function handleImport(event) {
+            importData(event.target.files[0]).then(() => location.reload());
+        }
+    </script>
+</body>
+</html>
